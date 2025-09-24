@@ -34,3 +34,26 @@
 * Needs a component called App. It is the highest level component
 * Index.js is the "magic" that puts the app.js into the document
   * Usually leave the index.js file alone and only work through App.js
+
+## React Component
+* Function that returns JSX (doesn't have to be JSX but you should or else there will be issue)
+  * This turns into JS after compling
+* Component function should be uppercase
+```jsx
+function Header() {
+    return (
+        <div>Hello World!</div>
+    )
+}
+```
+* This doesn't call it, you still need to call it to render
+* You can call as many times are you would like
+```jsx
+export default function App() {
+    return(
+        <div className="App">
+          <Greater />
+        </div>
+    );
+}
+```
