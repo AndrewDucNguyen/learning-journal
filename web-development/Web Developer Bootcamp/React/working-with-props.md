@@ -67,3 +67,4 @@ export default function DieRoll({numSides}){
 **stopped at setting default values**
 
 - You can set default values within the component grabbing the props
+- Look into closures and types
