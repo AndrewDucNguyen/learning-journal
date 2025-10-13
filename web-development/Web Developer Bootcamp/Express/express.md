@@ -73,3 +73,60 @@ app.get('*`, (req, res) => {
 })
 ```
 * Order of routes matter too
+
+## Express Path Parameter
+- If we want to define a partner for a path we do dynamic routing
+  - We wouldn't statically name every routing but we do:
+  ```
+  app.get('/r/:subreddit', (req, res) => {
+    const { subreddit } = req.params
+    res.send(`this is the ${subreddit} subreddit`)
+  })
+  ```
+- If we want to match even deeper nested url such as /r/subbreddit/1234
+```
+  app.get('/r/:subreddit/postId', (req, res) => {
+    const { subreddit, postId } = req.params
+    res.send(`this is the ${subreddit} subreddit for post ID ${postId}`)
+  })
+```
+
+## Working with Query Strings
+- Parsing query string we don't pass it in the express route, we just grab the data from the request
+```
+  app.get ('/search', (req, res) => {
+    // if we look up /search?q=dogs&color=red
+    req.query // will have q: 'dogs, color: 'red'
+  })
+```
+- Express parses it for you and handles the rest
+
+# Defining RESTful Routes
+
+## Key Points
+- Difference between GET and POST then understanding PUT, PATCH, DELETE
+- How to work with POST request, extract from POST request, how to get form data out
+- Forms and Express how to send data through Express app and extract it
+- Method Override
+- Handling POST requests in Express
+- RESTful routing
+  - CRUD routing
+
+## GET vs POST request
+- 2 different types of HTTP request we can make
+- GET
+  - Used to search/retrieve information
+  - Data is sent via query string when we submit data
+  - Information is plainly visible in the URL
+  - Limited amount of data we can send 
+  - If we send data with a GET request, its filtering and not impacting behind the scene or create, update, or delete something
+    - Its usualy search term, filter, sort
+- POST
+  - Used to post data to the server
+  - Used to write/create/update
+  - Won't be included in the query string but will be in the body
+    - Data is sent via request body, not a query string
+  - Can send any sort of data (JSON)
+
+## Defing Express Post Routes
+- Receiving request and handle POST request
