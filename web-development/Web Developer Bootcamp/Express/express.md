@@ -128,5 +128,23 @@ app.get('*`, (req, res) => {
     - Data is sent via request body, not a query string
   - Can send any sort of data (JSON)
 
-## Defing Express Post Routes
+## Defining Express Post Routes
 - Receiving request and handle POST request
+  - It is undefined by default
+  - Populated when you use body-parsing middleware such as `express.json()` or `express.urlencoded()`
+```
+const express = require('express')
+const app = express();
+
+app.use(express.urlencoded({extended: true}))
+
+// to access data it is in the req.body once you setup a form in html with a POST request
+
+const { meat, qty } = req.body
+
+app.post('/tacos', (req, res) => {
+  res.send()
+})
+```
+- To get data from GET, you do req.params
+- To get data from POST, you do req.body
