@@ -148,3 +148,9 @@ app.post('/tacos', (req, res) => {
 ```
 - To get data from GET, you do req.params
 - To get data from POST, you do req.body
+
+# REST
+- Representational State Transfer
+  - Architectural style for distributed hypermedia systems
+- Basically a set of guidelines/rules/principles for how a client + server should communicate and perform CRUD operations on a given resource
+- The main idea of REST is treating data on the server-side as resources then can be CRUDed
