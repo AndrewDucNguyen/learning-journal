@@ -237,3 +237,28 @@ app.patch ('/comments/:id', (req, res) => {
   res.redirect('/comments')
 })
 ```
+
+## Express Method Override
+- HTML forms can only send GET or POST request..
+  - We can fake it by doing a method override
+
+```
+// This is just the form rendering first
+app.get('/comments/:d/edit', (req,res) => {
+  const { id } = req.params
+  const comment = comment.find(c => c.id === parseInt(id))
+  res.render({comment})
+})
+```
+- You will have to pre-populate the comment text inside the textare form
+- Express has a tool called method-override which is a package. Have to install via npm
+  - The package has an override using query value to send HTTP header to the request that specifies that its suppose to be a DELETE even though its a POST on the form
+  - We'll use it through query string 
+
+  ```
+  const methodOverride = require('method-override')
+
+  // You have to use the same value in the parameter in the query string
+  app.use(methodOveride('_method'))
+  ```
+- Make sure the form method is POST and action has the query string `_method`
