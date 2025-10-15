@@ -150,7 +150,90 @@ app.post('/tacos', (req, res) => {
 - To get data from POST, you do req.body
 
 # REST
+
+## Definition
 - Representational State Transfer
   - Architectural style for distributed hypermedia systems
 - Basically a set of guidelines/rules/principles for how a client + server should communicate and perform CRUD operations on a given resource
 - The main idea of REST is treating data on the server-side as resources then can be CRUDed
+
+## RESTful comments overview
+- To setup resource for a comment
+```
+/comments - base for everything we do 
+
+Index - GET /comments - list all comments
+New - GET /comments - Form to create new comment
+Create - POST /comments - Create a new comment
+Show - GET /comments/:id - Get one comment (using ID)
+Edit - GET / comments/:id - Form to edit specific comment
+Update - PUT/PATCH /comments/:id - Update one comment
+Destroy - DELETE /comments/:id - Delete/Destroy/Remove one comment
+```
+
+```
+app.get ('/comments', (req, res) => {
+  res.render(comments)
+})
+```
+- This is just one way of implementing RESTful api
+- CRUD functionality blueprint
+
+## RESTful Comments New
+- When create a route for creating a new comment, you need two routes
+  - One to serve the form
+    - Typically */*/new route and a GET route
+  - One for form to submit somewhere as a POST to send data to
+  - Do not want to be the same route as the new comment form
+- 302 status code is a redirect
+- We usually want to do a redirect after submitting a form
+
+```
+// NEW - renders a form
+app.get('/comments/new', (req, res) => {
+    res.render('comments/new');
+})
+
+// CREATE - creates a new comment
+app.post('/comments', (req, res) => {
+    const { username, comment } = req.body;
+    comments.push({ username, comment, id: uuid() })
+    res.redirect('/comments');
+})
+```
+
+## RESTful Comment Show/Detail route 
+- For one specific comment or resource
+- Need unique identifier (often ID)
+  - To use the same identifier to get the same information/detail everytime
+- People usually won't know the ID so you setup a link for people to click on to get there
+- You do not want to hardcode your own ID, cause it'll be a lot of work to make sure it doesn't duplicate with anything
+  - Could use a package called `UUID`
+
+```
+app.get ('/comments/:id', (req, res) => {
+  const { id } = req.params;
+  const comment = comments.find(c => c.id === parseInt(id))
+  res.render('comments/show', comment)
+})
+```
+
+## RESTful Comments Update
+- Updating a specific resource
+  - You don't want to update the ID or change specific thing
+- Provide a form to edit a text or comment and then update that specific information
+- You can use two different methods:
+  - PUT - This method replaces all current representations of the target resource with the request payload.
+    - Basically replacing a representation and overriding the previous state
+  - PATCH - This method is used to apply partial modifications to a resource
+    - Only changes or modify one thing inside the resource
+- Usually you'll want to redirect instead of showing the content from a PATCH request
+```
+app.patch ('/comments/:id', (req, res) => {
+  const { id } = req.params;
+  const newComment = req.body.comment;
+  const updatedComment = comments.find(c => c.id === parseInt(id))
+  updatedComment.comment = newComment;
+  res.redirect('/comments')
+})
+```
