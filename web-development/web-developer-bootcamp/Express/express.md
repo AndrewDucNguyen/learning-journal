@@ -262,3 +262,5 @@ app.get('/comments/:d/edit', (req,res) => {
   app.use(methodOveride('_method'))
   ```
 - Make sure the form method is POST and action has the query string `_method`
+
+## RESTful Comment Delete

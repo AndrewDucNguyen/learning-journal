@@ -1,12 +1,14 @@
 # Array Methods
 
 ## Push, Pop, Shift, Unshift
+___
 * Push will add an item at the end of an array
 * Pop will remove the last item of the array
 * Shift will remove the first item of the array
 * Unshift will add an item to the beginning of the array
 
 ## concat
+___
 * merge arrays
 * Adding two arrays together to form a new array (merged)
 ```jsx
@@ -19,6 +21,7 @@ console.log(array3)
 ```
 
 ## includes
+___
 * look for a value
 * Boolean method (returns true or false)
 * Tells if an array includes a particular value
@@ -28,6 +31,7 @@ array.includes('a') // true
 ```
 
 ## indexOf
+___
 * Just like string.indexOf
 * Gives the first match that comes from array
 
@@ -37,18 +41,196 @@ array.indexOf('a') // 0
 ```
 
 ## join
+___
 * creates a string from an array
 
 ## reverse
+___
 * Reverses an array
 * Changes the original array (destructive)
 * Doesn't need an argument in the parenthesis
 
 ## slice
+___
 * copies a portion on an array
 
 ## splice
+___
 * removes/replaces elements
 
 ## sort
+___
 * sorts an array
+
+## Functions
+___
+- Important things to understand:
+    - Working with arguments
+    - Function Return Values
+    - Defining Functions
+- Functions are just reusable wrap of code with a name assigned to it to be used
+  - Allows us to write reusable, modular code
+  - Define a chunk of code that can be executed at a later time
+- 2-step process
+  - Define
+    - Conventionally camel case
+```js
+function funcName() {
+    // do something
+}
+```
+  - Run
+    - Will only run when we call it
+    - Usually called after the function is created/defined
+```js
+funcName(); // run once
+```
+
+## Function Scope
+
+### Block Scope
+```js
+let radius = 8;
+if (radius > 0) {
+    const PI = 3.124;
+    let msg = 'Hi'
+}
+console.log(radius)
+console.log(PI) // Can't access PI because it is in a different block (block scope)
+```
+- A block is typically any curly braces
+- This is similar to a function scope, but is typically with loops or conditional loops
+
+### Lexical Scope
+```js
+function bankRobbery() {
+    const heros = ['Spinderman', 'Wolverine', ' Black Panther']
+    function cryForHelp() {
+        for (let hero of heros) {
+            console.log(`Help ${hero.toUpperCase()}`)
+        }
+    }
+    cryForHelp() // the function has access to heros. Any children nested in a parent has access to parent variables
+}
+```
+
+### Function Expression
+- Different way of defining a function
+```js
+// function statement
+function add(x, y) {
+    return x + y
+}
+
+// function express - you store a function to a variable name
+const square = function (num) {
+    return num * num
+}
+```
+- Behaves the same way whenever we call them
+
+### Methods (function and objects and how they work together)
+- Add functions as properties on objects which is called methods
+```js
+const math = {
+    multiple: function (x, y) {
+        return x * y;
+    },
+    divide: function (x, y) {
+        return x / y;
+    },
+    square : function (x) {
+        return x * x;
+    }
+}
+math.multiple(2, 2) // returns 4
+```
+- Every method is a function, but not every function is a method
+- Shorthand approach:
+```js
+const math = {
+    add(x, y) {
+        return x * y
+    },
+    dvide(x, y) {
+        return x / y
+    },
+    // etc... 
+}
+```
+
+### Keyword 'this'
+___
+- Access other properties on the same object
+- Used inside an object for a method
+```js
+const cat = {
+    name: 'Cat',
+    color: 'blue',
+    breed: 'Fold',
+    meow() {
+        console.log('Meow')
+    }
+}
+```
+- The 'this' keyboard refers to the methods inside the cat object
+  - To access things such as name, color, or breed inside the `meow` method
+  - It has access to the data inside the object
+- To make meow method access the name
+  - You can't just access it with `name`, `breed`, or etc because it'll give a undefined error
+```js
+const cat = {
+    name: 'Cat',
+    color: 'blue',
+    breed: 'Fold',
+    meow() {
+        console.log(`${name} says Meow`) // this will work and says: Cat says meow
+    }
+}
+```
+- The value of `this` depends on the invocation context of the function it is used in
+  - It depends on how we actually call the function...
+```js
+const cat = {
+    name: 'Cat',
+    color: 'blue',
+    breed: 'Fold',
+    meow() {
+        console.log('Meow')
+    }
+}
+
+const meow2 = cat.meow; // reference to the thing. This is a function
+
+meow2() // says meow, it returns a empty name because of the invocation and does not have access to name
+```
+- The invocation for meow2 does not have a invocation because of the meow doesn't have a `.meow` to the left
+  - It does not refer to the cat object, but rather it refers to the window object
+  - window is the top leve object and the default for the value `this`
+```js
+const hen = {
+    name: 'Helen',
+    eggCount: 0,
+    layAnEgg() {
+        this.eggCount += 1;
+        return 'EGG'
+    }
+}
+```
+
+## Callbacks and Array methods
+
+### forEach
+___
+- Accepts a callback function
+- Calls the function once per element in the array
+```js
+const num = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+nums.forEach(function(n) {
+    console.log(n + 1)
+    // prints 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+})
+```
+- A callback is a function that you pass into another function as an argument
+- 
