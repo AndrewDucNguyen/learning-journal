@@ -233,4 +233,3 @@ nums.forEach(function(n) {
 })
 ```
 - A callback is a function that you pass into another function as an argument
-- 
