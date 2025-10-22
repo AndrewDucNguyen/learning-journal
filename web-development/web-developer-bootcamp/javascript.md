@@ -233,3 +233,17 @@ nums.forEach(function(n) {
 })
 ```
 - A callback is a function that you pass into another function as an argument
+- forEach is not as commonly used as forOf
+
+### Map
+___
+- Creates a new array with the results of calling a callback on every element in the array
+- Map an array state to another state
+```js
+const text = ['rolf', 'lol', 'omg', 'ttyl']
+const caps = texts.map(function(t) {
+    return t.toUpperCase();
+})
+text; // ['rolf', 'lol', 'omg', 'ttyl']
+caps; // ['ROLF', 'LOL', 'OMG', 'TTYL']
+```
