@@ -247,3 +247,4 @@ const caps = texts.map(function(t) {
 text; // ['rolf', 'lol', 'omg', 'ttyl']
 caps; // ['ROLF', 'LOL', 'OMG', 'TTYL']
 ```
+
