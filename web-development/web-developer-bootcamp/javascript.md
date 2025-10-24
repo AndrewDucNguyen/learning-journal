@@ -247,4 +247,31 @@ const caps = texts.map(function(t) {
 text; // ['rolf', 'lol', 'omg', 'ttyl']
 caps; // ['ROLF', 'LOL', 'OMG', 'TTYL']
 ```
+- Doesn't mutate but changes the number so you can store in new variable
+```js
+const firstNames = fullNames.map(function(name){
+    return name.first;
+})
+```
 
+### Arrow Functions
+___
+- Newer syntax for defining functions, more compacted but still does the same thing with creating functions
+```js
+const square = (x) => {
+    return x * x
+}
+```
+- It creates function expressions
+```js
+// instead of this
+const add = function(x, y){
+    return x + y
+}
+
+// do this
+const add = (x, y) => {
+    return x + y
+}
+```
+- Can't exist on its own, has to be given name
