@@ -275,3 +275,22 @@ const add = (x, y) => {
 }
 ```
 - Can't exist on its own, has to be given name
+
+### Arrow Functions Implicit return
+___
+- Can leave off `return` keyword only with arrow functions
+```js
+const rollDie = () => {
+    return Math.floor(Math.random() * 6) + 1
+}
+
+// or
+const rollDie = () => (
+    Math.floor(Math.random() * 6) + 1
+)
+
+// or
+const rollDie = () => Math.floor(Math.random() * 6) + 1
+```
+- Only works if there is only one value/statement/expression in the body
+- 
