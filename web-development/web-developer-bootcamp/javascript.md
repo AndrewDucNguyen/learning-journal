@@ -293,4 +293,25 @@ const rollDie = () => (
 const rollDie = () => Math.floor(Math.random() * 6) + 1
 ```
 - Only works if there is only one value/statement/expression in the body
-- 
+
+
+### Filter
+___
+- Creates a new array with all elements that pass the test implemented by the provided function
+```js
+const nums = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+const odd = nums.filter( n => {
+    return n % 2 === 1
+}) // This callback returns true or false 
+    // if returns true, n is added to the filtered array, else it will skill over it
+    // [1, 3, 5, 7, 9] 
+
+const smallNums = nums.filter(n => n < 5) // [4, 3, 2, 1]
+
+```
+- Callback function needs to be a boolean function where it returns true or false to check the array against
+
+### Some & Every
+___
+- These are boolean methods
+  - This means that it returns true or false
