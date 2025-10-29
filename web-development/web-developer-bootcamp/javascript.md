@@ -315,3 +315,17 @@ const smallNums = nums.filter(n => n < 5) // [4, 3, 2, 1]
 ___
 - These are boolean methods
   - This means that it returns true or false
+- Some returns true if ANY of the array elements pass the test function
+- Every returns true if EVERY item of the array element pass the test function
+- These do not return new arrays
+
+### Reducer
+___ 
+- Executes a reducer function on each element of the array, resulting in a single value
+- Take some array and reduce it down to a single value
+  - How it does that is up to us
+```js
+[3, 5, 7, 9, 11].reduce((acc, curr) => {
+    return acc + curr // this will add all the numbers in the array together
+})
+```
