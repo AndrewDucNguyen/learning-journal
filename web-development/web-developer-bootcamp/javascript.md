@@ -329,3 +329,34 @@ ___
     return acc + curr // this will add all the numbers in the array together
 })
 ```
+- To find the max/min of an array
+```js
+const minPrice = prices.reduce((min, price) => {
+    if( price < min ) {
+        return price
+    }
+    return min
+})
+```
+- You can specify a initial starting point
+  - It's the second parameter/argument which is the initial value
+```js
+const evens = [2, 4, 6, 8]
+
+evens.reduce((sum, num) => {
+    return sum + num
+}, 100) // the sum of the array + 100 
+```
+### Arrow function & this
+- The `this` keyword functions differently inside a arrow function vs a non-arrow function
+```js
+const person = {
+    firstNae: 'Viggo',
+    lastName: 'Mortensen',
+    fullName: function(){
+        return `${firstName} ${lastName}`
+    }
+}
+```
+- This in an arrow function refers to the scope it was created in
+- Traditional function the `this` keyword doesn't worry about the scope of where it was created but how the function was executed
