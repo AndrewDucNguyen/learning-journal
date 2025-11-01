@@ -140,6 +140,8 @@ searchMoviesAPI('amadeus', () => {
 ## Promises
 ___
 - A `Promise` is an object representing the eventual completion or failure of an asynchronous operation
+  - Its like when a parent promises to give you candy on a condition. You don't get it right then, but you'll eventually get it
+  - You might not eat veggies or etc and not actually get the candy
 ```js
 const fakeRequestCallback = (url, success, failure) => {
     const delay = Math.floor(Math.random() * 4500) + 500;
@@ -150,19 +152,6 @@ const fakeRequestCallback = (url, success, failure) => {
             success(`here is your data ${url}`)
         }
     }, delay)
-}
-
-const fakeRequestPromise = (url) => {
-    return new Promise((resolve, reject) => {
-        const delay = Math.floor(Math.random() * 4500) + 500;
-        setTimeout( () => {
-            if (delay > 4000) {
-                failure('connection timeout')
-            } else {
-                success(`here is your data ${url}`)
-            }
-        }, delay)
-    })
 }
 
 fakeRequestCallback(('books.com/page1'), function(response) {
@@ -180,3 +169,156 @@ fakeRequestCallback(('books.com/page1'), function(response) {
 ```
 - This is callback hell if we wanted to keep making request. We have to nest it within each success
   - Then came promises
+```js
+// Only expects URL and not have success or failure
+const fakeRequestPromise = (url) => {
+    return new Promise((resolve, reject) => {
+        const delay = Math.floor(Math.random() * 4500) + 500;
+        setTimeout( () => {
+            if (delay > 4000) {
+                failure('connection timeout')
+            } else {
+                success(`here is your data ${url}`)
+            }
+        }, delay)
+    })
+}
+```
+- Promises are asynchronous value that eventually be resolved or rejected
+- Promises have three states
+  - Pending
+  - Resolved
+  - Rejected
+- The purpose of promises are that you can run code if it is resolved or rejected
+  - A promise is a returned objected to which you **attached** callbacks, instead of **passing** callbacks into a function
+  - We wait for the promise to return a promise object
+```js
+const request = fakeRequestPromise('yelp.com/api/page1');
+
+request
+    .then( () => {
+        console.log('It worked')
+    })
+    .catch( () => {
+        console.log('Error')
+    })
+```
+- You pass a callback function into `.then()` and `.catch()`
+- It will only run one whether it passes or fails
+- You don't really have to save the promise into a variable to make it run
+```js
+fakeRequestPromise('yelp.com/api/page1')
+    .then( () => {
+        console.log('It worked (1)')
+        fakeRequestPromise('yelp.com/api/page2')
+            .then( () => {
+                console.log('It worked (2)')
+                fakeRequestPromise('yelp.com/api/page3')
+                    .then( () => {
+                        console.log('It worked (3)')
+                    })
+                    .catch( () => {
+                        console.log('Error (3)')
+                    })
+            })
+            .catch( () => {
+                console.log('Error (2)')
+            })
+    })
+    .catch( () => {
+        console.log('Error (1)')
+    })
+```
+- This doesn't seem like it helps with the callback hell, but you can clean this up a little bit
+
+## Magic of Promises
+___
+```js
+fakeRequestPromise('yelp.com/api/page1')
+    .then( () => {
+        console.log('It worked (1)')
+        return fakeRequestPromise('yelp.com/api/page2')
+    })
+    .then( () => {
+        console.log('It worked (2)')
+        return fakeRequestPromise('yelp.com/api/page3')
+    })
+    .then( () => {
+        console.log('It worked (3)')
+    })
+    .catch( () => {
+        console.log('Error')
+    })
+```
+- You can return the promise within `.then()` and then call the next promise if wanted on the same line
+  - It calls the promises sequentially and will only go onto the next `.then()` if it succeeds
+- The `.catch()` will handle all the failures
+- Promises are resolved and rejected with values passed in it
+  - We would want the data either way
+  - You can call it in the callback function and pass it as a parameter
+```js
+fakeRequestPromise('yelp.com/api/page1')
+    .then( (data) => {
+        console.log(data) // shows the data in the promise
+        console.log('It worked (1)')
+        return fakeRequestPromise('yelp.com/api/page2')
+    })
+    .then( (data) => {
+        console.log('It worked (2)')
+        return fakeRequestPromise('yelp.com/api/page3')
+    })
+    .then( (data) => {
+        console.log('It worked (3)')
+    })
+    .catch( (err) => {
+        console.log('Error')
+    })
+```
+
+## Creating our own Promises
+___
+```js
+// Expects to pass in function with two parameters
+new Promise((resolve, reject) => {
+    // resolve and reject are functions that we can execute at any given moment inside the promise
+    
+})
+
+const fakeRequest = (url) => {
+    new Promise ((resolve, reject) => {
+        const rand = Math.random()
+        setTimeout( () => {
+            if (rand > 0.7) {
+                resolve()    
+            }
+            else {
+                reject()
+            }
+        }, 1000)
+    })
+}
+fakeRequest('/dog/1')
+    .then((data) => {
+        console.log('done with request', data)
+    })
+    .catch( (err) => {
+        console.log('error', err)
+    })
+```
+- Rewrite the delay color change in promise
+```js
+const delayedColorChange = (color, delay) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            document.body.style.backgroundColor = color;
+            resolve();
+        }, delay)
+    })
+}
+
+delayedColorChange('red', 1000)
+    .then( () => delayedColorChange('orange', 1000))
+    .then( () => delayedColorChange('yellow', 1000))
+    .then( () => delayedColorChange('green', 1000))
+    .then( () => delayedColorChange('blue', 1000))
+```
