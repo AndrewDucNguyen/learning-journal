@@ -322,3 +322,67 @@ delayedColorChange('red', 1000)
     .then( () => delayedColorChange('green', 1000))
     .then( () => delayedColorChange('blue', 1000))
 ```
+
+## The Async Keyword
+___
+- Async functions helps us write clean code
+- A newer and cleaner syntax for working with async code! Syntax "makeup/sugar" for promises
+- 2 pieces
+  - **Async**
+  - **Await**
+- Async functions always return a promise
+- If the function returns a value, the promise will be resolved with that value
+- If the function throws an exception, the promise wll be rejected
+```js
+async function hello () {
+    
+} // this will return a promise
+
+const sing = async () => {
+    return 'La la la' // will return this as the promise value
+}
+
+sing().then((data) => {
+    console.log('Promise data:', data) // Promise data: La la la
+})
+```
+- To reject a promise you have to throw an error
+  - Syntax error (not what is recommended or we do)
+  - Use `throw new Error`
+  - Use `throw`
+```js
+const sing = async () => {
+    throw new Error('Uh oh')
+    return 'La la la';
+
+    // This will return a rejected promise with the value 'Uh oh'
+}
+
+sing().then((data) => {
+    console.log('Promise data:', data) // Promise data: La la la
+})
+.catch((err) => {
+    console.log('Error', err) // Error Uh oh
+})
+```
+- Example: 
+  - Login are usually async because it has to wait and check against the DB with what is input
+```js
+const login = async (username, password) => {
+    if(!username || !password) {
+        throw 'Missing Creds'
+    }
+    if (password === 'corgi') {
+        return 'Welcome'
+    }
+    throw 'Invalid password'
+}
+
+login('asdj')
+    .then((data) => {
+        console.log('Logged in', data) // Logged in Welcome
+    })
+    .catch((err) => {
+        console.log('Error', err) // Error Missing Creds
+    })
+```
