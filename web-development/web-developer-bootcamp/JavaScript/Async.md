@@ -378,7 +378,7 @@ const login = async (username, password) => {
     throw 'Invalid password'
 }
 
-login('asdj')
+login('test')
     .then((data) => {
         console.log('Logged in', data) // Logged in Welcome
     })
