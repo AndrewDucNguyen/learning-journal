@@ -366,7 +366,7 @@ sing().then((data) => {
 })
 ```
 - Example: 
-  - Login are usually async because it has to wait and check against the DB with what is input
+  - Login/Registrations are usually async because it has to wait and check against the DB with what is input
 ```js
 const login = async (username, password) => {
     if(!username || !password) {
