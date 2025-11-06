@@ -386,3 +386,56 @@ login('test')
         console.log('Error', err) // Error Missing Creds
     })
 ```
+## The Await Keyword
+___
+- What allows us to write asynchronous code and make it look synchronous 
+- We can only use the await keyword inside of functions declared with async.
+- Await will pause the execution of the function waiting for a promise to be resolved
+```js
+const delayedColorChange = (color, delay) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            document.body.style.backgroundColor = color;
+            resolve();
+        }, delay)
+    })
+}
+
+// Old approach
+delayedColorChange('red', 1000)
+    .then( () => delayedColorChange('orange', 1000))
+    .then( () => delayedColorChange('yellow', 1000))
+    .then( () => delayedColorChange('green', 1000))
+    .then( () => delayedColorChange('blue', 1000))
+
+// Async approach
+async function rainbow() {
+    await delayedColorChange('red', 1000)
+    await delayedColorChange('orange', 1000)
+    await delayedColorChange('yellow', 1000)
+    await delayedColorChange('green', 1000)
+    await delayedColorChange('blue', 1000)
+}
+```
+- To grab the data from the await, you can store/capture it inside a variable
+```js
+async function makeTwoRequest() {
+    let data1= await fakeRequest('/page1')
+    console.log(data1) // Here is your fake data from page1
+}
+```
+
+## Handling Errors in Async Functions
+___
+- What happens when a promise is rejected?
+  - You can do try catch
+```js
+async function makeTwoRequest() {
+    try {
+        let data1= await fakeRequest('/page1')
+        console.log(data1) // Here is your fake data from page1
+    } catch (e) {
+        console.log('Error', e)
+    }
+}
+```
