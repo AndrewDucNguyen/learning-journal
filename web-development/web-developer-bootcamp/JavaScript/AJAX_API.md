@@ -70,4 +70,4 @@ ___
 ## HTTP Status Code
 ___
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
-- Code that comes back from HTTP response and usually means something
+- Status codes are code that comes back from HTTP response and they usually mean something
