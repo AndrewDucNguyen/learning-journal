@@ -71,4 +71,26 @@ ___
 ___
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
 - Status codes are code that comes back from HTTP response and they usually mean something
-- 
+
+## Understanding Query String
+___
+- `/people/:id/`
+  - The ID changes within this api route
+- You can use query string to include extra information in the link
+  - HTTPS://www.amazon.com?k=bucatini&crid=3id&sprefix=bucat%2caps%2c&ref=nb_sb_noss
+    - query string comes after the `?`
+  - ?sort=desc&color=blue
+    - Sort is descending
+    - Color is blue
+- You can append a query string on any api
+  - It won't mess it up or anything because it doesn't raelly care about it or do anything with it if it doesn't require it
+- Typically done by `?q=`
+
+## HTTP Headers
+___
+- Additional way of sending information with request
+- meta data/little add-on details
+- Key value pairs
+- Can view with dev tool
+- You also get headers back with response from the server
+- Some APIs require headers when the url is the same for APIs as accessing the site
