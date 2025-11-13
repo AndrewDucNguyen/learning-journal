@@ -94,3 +94,59 @@ ___
 - Can view with dev tool
 - You also get headers back with response from the server
 - Some APIs require headers when the url is the same for APIs as accessing the site
+
+## Making XHR's
+___
+- XMLHttpRequest
+  - Old/original way of doing it
+- Does not support promises, lots of callbacks
+- Clunky syntax
+```js
+const req = new XMLHttpRequest();
+
+req.onload = function(){
+    console.log(this.responseText) // this is just text so you need to convert to JSON
+    const data = JSON.parse(this.responseText)
+}
+
+req.onerror = function() {
+    console.log('error')
+}
+
+req.open("GET", "https://swapi.dev/api/people/1")
+
+req.send();
+```
+- Don't need to remember this because we have fetch
+
+## Fetch
+___
+- Improved way of making request
+  - XHR makes it difficult to make multiple request in a row
+  - Fetch solves that problem
+```js
+fetch('https://swapi.dev/api/people/1')
+    .then(res => {
+    console.log(res) // will need to do .json() because it has a incomplete body to parse
+    return res.json() // this returns a promise so you'll need a .then()
+})
+    .then(data => console.log(data))
+    .catch((e) => {
+    console.log(e)
+})
+```
+
+- Can do async to make it even better
+```js
+const loadStarWarsPeople = async () => {
+   try {
+       const res = await fetch('https://swapi.dev/api/people/1')
+       const data = await res.json();
+       console.log(data)
+   } catch(e) {
+       console.log('error', e)
+   }
+}
+
+loadStarWarsPeople();
+```
