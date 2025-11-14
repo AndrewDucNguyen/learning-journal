@@ -150,3 +150,37 @@ const loadStarWarsPeople = async () => {
 
 loadStarWarsPeople();
 ```
+
+## Axios
+___ 
+- A library for making HTTP requests
+- A separate library made for http request
+  - Not native
+- Uses fetch behind the scene
+- Works with node.js
+  - Can use on client and server
+```js
+// Install axios and then use it 
+const axios = require('axios')
+
+// Make a request for a user with a given ID
+axios.get('https://swapi.dev/api/people/1')
+.then( res => {
+    console.log(res) // the response object and you don't have to parse it
+})
+.catch(e => {
+    console.log(e)
+})
+```
+- Can use with async function too
+```js
+const getStarWarsPerson = async () => {
+    try {
+        const res = await axios.get('https://swapi.dev/api/people/1')
+        console.log(res.data)
+    } catch(e) {
+        console.log(e)
+    }
+}
+```
+- It really just skips one extra step that fetch does
