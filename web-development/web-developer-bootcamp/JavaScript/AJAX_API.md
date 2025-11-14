@@ -184,3 +184,19 @@ const getStarWarsPerson = async () => {
 }
 ```
 - It really just skips one extra step that fetch does
+
+## Setting headers with axios
+___
+- Configuring request headers
+- With fetch, you have to specify an `accept` header
+- In axios, theres a second argument for `.get()`
+  - Inside the second argument, theres a header object that you can modify
+```
+const getDadJokes = async () => {
+  const config = {headers: { Accept: 'application'}}
+
+  const res = await axios.get('https://icanhazdadjokes.com', config)
+
+  console.log(res)
+}
+```
