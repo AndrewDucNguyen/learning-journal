@@ -22,3 +22,46 @@ ___
 ## Object Oriented Programming
 ___
 - Breaking things up into patterns and objects
+
+## Factory Functions
+___
+```
+fucntion hex(r, g, b) {
+    return 'x' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+}
+
+function rgb(r, g, b,) {
+    return `rgb(${r}, ${g}, ${b})`
+}
+```
+- If we want to make a object to convert back and forth without passing number all the time
+    - This is where factory function comes in
+
+```
+function makeColor(r, g, b) {
+    // Make object
+    const color = {};
+    color.r = r
+    color.g = g
+    color.b = b
+
+    color.rgb = function() {
+        const {r, g, b} = this
+        return `rgb(${r}, ${g}, ${b})`
+    }
+
+    color.hex = function() {
+        const {r, g, b} = this
+        return 'x' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+    }
+
+    // Return object at the end to use
+    return color
+}
+
+const firstColor = makeColor(35, 255, 150)
+firstColor.hex()
+```
+- This is not the main way people create object based off patterns
+
+## Constructor Functions
