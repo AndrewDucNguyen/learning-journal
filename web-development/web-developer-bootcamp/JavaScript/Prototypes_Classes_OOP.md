@@ -65,3 +65,5 @@ firstColor.hex()
 - This is not the main way people create object based off patterns
 
 ## Constructor Functions
+___
+- 
