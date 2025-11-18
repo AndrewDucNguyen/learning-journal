@@ -109,6 +109,7 @@ function Color(r, g, b) {
 - To create functions/methods inside the function you can do it on the prototype
     - This is so you only have to create the function once rather than everytime on a new funciton
     - It also is the center of truth for that specific function and you only have to change it once if you change something
+
 ```
 // Wrong way
 function Color(r, g, b) {
@@ -129,3 +130,68 @@ Color.prototype.rgb = function() {
 ```
 - More efficent than the factory function cause it doesn't return a new object/function every time it is called
 - Shouldn't use arrow functions with this because it behaves differently
+
+## JavaScript Classes
+___
+- Even better way to replicate a template for a color and the previous constructor function
+- Syntactic sugar for what we've been doing above
+- We don't have to add methods to the prototype manually or break things up
+    - It'll be more compact unlike the constructor function
+
+- Typically uppercase for the first letter
+- Always add in a constructor
+    - This is a function that will execute immediately whenever a new color is created
+    - refer to a new object and sets the value of this to that object
+    Doesn't have to be the same name, but it is very common to do that
+```
+class Color {
+    constructor(r, g, b, name) {
+        this.r = r
+        this.g = g
+        this.b = b
+        this.colorName = name
+    }
+
+    greet() {
+        return `Hello from ${this.name}`
+    }
+
+    rgb() {
+        const {r, g, b} = this;
+        return `rgb(${r}, ${g}, ${b})`
+    }
+}
+
+const c1 = new Color(255, 67, 89, 'tomato')
+```
+- Creating a function inside the class is basically like creating it inside the prototype and group everything together
+    - It won't create the function on every instance, but each new class will have access to it now whenever created
+- For classes created by the new keyword, `this` will refer to that (the left side calling it)
+- You can call another method inside the class
+```
+class Color {
+    constructor(r, g, b, name) {
+        this.r = r
+        this.g = g
+        this.b = b
+        this.colorName = name
+    }
+
+    innerRGB() {
+        const {r, g, b} = this;
+        return `rgb(${r}, ${g}, ${b})`
+    }
+
+    greet() {
+        return `Hello from ${this.name}`
+    }
+
+    rgb() {
+        return `rgb(${this.innerRGB()})`
+    }
+    
+    rgba(a=1.0){
+        return `rgba(${this.innerRGB()}, ${a})`
+    }
+}
+```
