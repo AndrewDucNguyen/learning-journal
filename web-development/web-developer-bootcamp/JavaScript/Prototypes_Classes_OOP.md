@@ -25,7 +25,7 @@ ___
 
 ## Factory Functions
 ___
-```
+```js
 fucntion hex(r, g, b) {
     return 'x' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
@@ -37,7 +37,7 @@ function rgb(r, g, b,) {
 - If we want to make a object to convert back and forth without passing number all the time
     - This is where factory function comes in
 
-```
+```js
 function makeColor(r, g, b) {
     // Make object
     const color = {};
@@ -61,7 +61,7 @@ function makeColor(r, g, b) {
 
 const firstColor = makeColor(35, 255, 150)
 firstColor.hex()
-```
+```js
 - This is not the main way people create object based off patterns
 
 ## Constructor Functions
@@ -92,7 +92,7 @@ function Car(make, model, year) {
 let car1 = new Car('Eagle', 'Talon TSi', 1993)
 ```
 - Remaking he color function from earlier
-```
+```js
 function Color(r, g, b) {
     this.r = r;
     this.g = g
@@ -110,7 +110,7 @@ function Color(r, g, b) {
     - This is so you only have to create the function once rather than everytime on a new funciton
     - It also is the center of truth for that specific function and you only have to change it once if you change something
 
-```
+```js
 // Wrong way
 function Color(r, g, b) {
     this.r = r;
@@ -143,7 +143,7 @@ ___
     - This is a function that will execute immediately whenever a new color is created
     - refer to a new object and sets the value of this to that object
     Doesn't have to be the same name, but it is very common to do that
-```
+```js
 class Color {
     constructor(r, g, b, name) {
         this.r = r
@@ -168,7 +168,7 @@ const c1 = new Color(255, 67, 89, 'tomato')
     - It won't create the function on every instance, but each new class will have access to it now whenever created
 - For classes created by the new keyword, `this` will refer to that (the left side calling it)
 - You can call another method inside the class
-```
+```js
 class Color {
     constructor(r, g, b, name) {
         this.r = r
@@ -196,5 +196,77 @@ class Color {
 }
 ```
 
-## More Classes Practice
+## Extends and Super Keyword
 ___
+- Relates to subclassing 
+    - Inheritance
+    - Sharing functionality between classes
+```js
+class Cat {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age
+    }
+
+    eat() {
+        return `${this.name} is eating`
+    }
+}
+
+class Dog {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age
+    }
+
+    eat() {
+        return `${this.name} is eating`
+    }
+}
+```
+- Both of these classes could extend
+    - Think about parent-child class
+
+```js
+class Pet {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age
+    }
+
+    eat() {
+        return `${this.name} is eating`
+    }
+}
+
+class Cat extends Pet {
+
+    meow() {
+        return 'Meow'
+    }
+}
+
+class Dog extends Pet{
+
+    bark() {
+        return 'bark'
+    }
+}
+
+```
+- This should return a class that is able to run `eat()` and show name and age
+- It uses the Pet constructor
+- `Super` is for when we want to use the same constructor from the parent class while add in new constructor for that specific class
+    - It is a reference to the super class or what we are extending from
+```js
+class Cat extends Pet {
+    constructor(name, age, livesLeft) {
+        super(name, age)
+        this.livesLeft = livesLeft
+    }
+
+    meow() {
+        return 'Meow'
+    }
+}
+```
