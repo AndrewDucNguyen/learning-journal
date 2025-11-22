@@ -266,7 +266,7 @@ app.get('/comments/:id/edit', (req,res) => {
 ## RESTful Comment Delete
 - Can't send from form and have to fake it
 ```js
-  app.delete('/comments/:d', (req, res ) => {
+  app.delete('/comments/:id', (req, res ) => {
     const { id } = params;
     const comment = comments.find(c => c.id === id
     comments = comments.filter(c => c.id !== id)
