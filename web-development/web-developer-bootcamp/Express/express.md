@@ -14,7 +14,7 @@
 ## First Express App
 * Install Express by doing `npm install express`
 
-```
+```js
 const express = require("express"); // require express
 
 const app = express() // execute express
@@ -41,7 +41,7 @@ app.listen(3000, () => {
 
 * HTTP requests can only get one response so you have to comment out `app.use`
 
-```
+```js
 /*
   if we want to make /cats => 'meow'
   /dogs => 'woof
@@ -67,7 +67,7 @@ app.get('/dogs', (req, res) => {
   * `app.post` is POST
 
 * To catch all other routes for error then use:
-```
+```js
 app.get('*`, (req, res) => {
   res.send('I don't know that route...')
 })
@@ -93,7 +93,7 @@ app.get('*`, (req, res) => {
 
 ## Working with Query Strings
 - Parsing query string we don't pass it in the express route, we just grab the data from the request
-```
+```js
   app.get ('/search', (req, res) => {
     // if we look up /search?q=dogs&color=red
     req.query // will have q: 'dogs, color: 'red'
@@ -132,7 +132,7 @@ app.get('*`, (req, res) => {
 - Receiving request and handle POST request
   - It is undefined by default
   - Populated when you use body-parsing middleware such as `express.json()` or `express.urlencoded()`
-```
+```js
 const express = require('express')
 const app = express();
 
@@ -159,7 +159,7 @@ app.post('/tacos', (req, res) => {
 
 ## RESTful comments overview
 - To setup resource for a comment
-```
+```js
 /comments - base for everything we do 
 
 Index - GET /comments - list all comments
@@ -171,7 +171,7 @@ Update - PUT/PATCH /comments/:id - Update one comment
 Destroy - DELETE /comments/:id - Delete/Destroy/Remove one comment
 ```
 
-```
+```js
 app.get ('/comments', (req, res) => {
   res.render(comments)
 })
@@ -188,7 +188,7 @@ app.get ('/comments', (req, res) => {
 - 302 status code is a redirect
 - We usually want to do a redirect after submitting a form
 
-```
+```js
 // NEW - renders a form
 app.get('/comments/new', (req, res) => {
     res.render('comments/new');
@@ -210,7 +210,7 @@ app.post('/comments', (req, res) => {
 - You do not want to hardcode your own ID, cause it'll be a lot of work to make sure it doesn't duplicate with anything
   - Could use a package called `UUID`
 
-```
+```js
 app.get ('/comments/:id', (req, res) => {
   const { id } = req.params;
   const comment = comments.find(c => c.id === parseInt(id))
@@ -228,7 +228,7 @@ app.get ('/comments/:id', (req, res) => {
   - PATCH - This method is used to apply partial modifications to a resource
     - Only changes or modify one thing inside the resource
 - Usually you'll want to redirect instead of showing the content from a PATCH request
-```
+```js
 app.patch ('/comments/:id', (req, res) => {
   const { id } = req.params;
   const newComment = req.body.comment;
@@ -242,9 +242,9 @@ app.patch ('/comments/:id', (req, res) => {
 - HTML forms can only send GET or POST request..
   - We can fake it by doing a method override
 
-```
+```js
 // This is just the form rendering first
-app.get('/comments/:d/edit', (req,res) => {
+app.get('/comments/:id/edit', (req,res) => {
   const { id } = req.params
   const comment = comment.find(c => c.id === parseInt(id))
   res.render({comment})
@@ -255,7 +255,7 @@ app.get('/comments/:d/edit', (req,res) => {
   - The package has an override using query value to send HTTP header to the request that specifies that its suppose to be a DELETE even though its a POST on the form
   - We'll use it through query string 
 
-  ```
+  ```js
   const methodOverride = require('method-override')
 
   // You have to use the same value in the parameter in the query string
@@ -264,3 +264,12 @@ app.get('/comments/:d/edit', (req,res) => {
 - Make sure the form method is POST and action has the query string `_method`
 
 ## RESTful Comment Delete
+- Can't send from form and have to fake it
+```js
+  app.delete('/comments/:d', (req, res ) => {
+    const { id } = params;
+    const comment = comments.find(c => c.id === id
+    comments = comments.filter(c => c.id !== id)
+    )
+  })
+```
