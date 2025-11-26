@@ -75,7 +75,7 @@ app.get('*`, (req, res) => {
 * Order of routes matter too
 
 ## Express Path Parameter
-- If we want to define a partner for a path we do dynamic routing
+- If we want to define a pattern for a path we do dynamic routing
   - We wouldn't statically name every routing but we do:
   ```
   app.get('/r/:subreddit', (req, res) => {

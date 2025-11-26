@@ -47,7 +47,26 @@ Its popularity also means there is a strong community of developers using Mongo
     - `show dbs`
 - To show the db you're currently on:
     - `db`
-- To change db
+- To change/create db 
     - `use <db name>`
     - If the db doesn't ecist, it'll create you a new one and change it
     - It will not show up in the db show list if it is empty
+
+## What is BSON?
+- Simliar to JSON
+- The problem with JSON is that it is slow since it is text base format and not space efficient
+    - Can't compress and make smaller
+    - Does not support bunch of data type
+- Binary JSON
+    - More compact version of JSON
+    - Mongo will store it as binary
+    - Includes different data types
+
+## Inserting with Mongo
+- To insert in Mongo you have to insert into a collection
+    - If you insert into a collection that doesn't yet exist, it'll create one for you
+```node
+    db.collection.insertOne() // Insert a single document into a collection
+    db.collection.insertMany() // Inserts multiple document
+    db.collection.insert() //
+```
