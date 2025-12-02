@@ -122,3 +122,45 @@ db.dogs.updateOne({name: 'Charlie'}, {$set: {age: 4}})
     - If we want to keep track of when something was last changed
 - `db.collection.replaecOne` completely replaces the object in the document with something new that you're wanting to change
     - Replaces everything
+
+## Deleting With Mongo
+- There are two methods with deleting
+```js
+db.collectino.deleteMany()
+db.collection.deleteOne()
+
+// Just like finding in DB
+db.cats.deleteOne({name: 'Blue Steele'})
+
+// This deletes multiple
+db.cats.deleteMany({isAvailable: true})
+
+// If you want to delete everything
+db.dogs.deleteMany({})
+```
+
+## Additional Mongo Operators
+- Operators for finding and updating
+- If you want to find a dog with age between a certain age or greater/lesser than something
+```js
+// If properties is nested inside the object and not at the top level
+db.dogs.find({'personality.childFriendly': true})
+```
+- Comparison Operators
+    - $eq: Matches values that are equal to a specified value
+    - $gt: Matches values that are greater than a specified value
+    - $gte: Matches values that are greater than or equal to a specified value
+    - $in: Matches any of the values specified in an array
+    - $lt: Matches values that are less than a specified value
+    - $lte: Matches values that are less than or equal to a specified value
+    - $ne: Matches all values that are not equal to a specified value
+    - $nin: Matches none of the values specified in an array
+- Logical Operators:
+    - $and: Joins query clauses with a logical **AND** returns all documents that match the conditions of both cluases
+    - $not: Inverts the effect of a query expression and returns documents that do not match the query expression
+    - $nor: Joins query clauses with a logical **NOR** returns all documents that fail to match both cluases
+    - $or: Joins query cluases with a logical **OR** returns all documents that match the conditions of either cluase
+```js
+// Find all dogs that are older than 8 years old
+db.dogs.find({age: {$gt: 8}})
+```
