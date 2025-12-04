@@ -129,4 +129,21 @@
 
 ## Practice questions:
 - Explain useEffect in detail and why people accidentally create infinite loops
-    - 
+
+
+## useState vs useRef
+- They're the same in the aspect that they can store data, but it is different under the hood
+### useState
+- Can't mutate the value directly
+- Causes re-render when the state changes
+- Good for UI data
+
+### useRef
+- Mutates the data directly
+- Does not re-render when value changes
+- References the same reference everytime
+- Good for data that is not for UI
+
+## React Devtools
+- For performance and debugging
+    - See how many time its re-rendering, whats making it re-render, and how long a component takes to load
