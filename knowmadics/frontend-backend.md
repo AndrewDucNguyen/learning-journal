@@ -147,4 +147,5 @@
     ```
 
     5. useReducer
+        - Same as useState but more for data then UI
     6. useContext
