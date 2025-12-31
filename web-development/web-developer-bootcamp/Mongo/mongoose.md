@@ -68,3 +68,21 @@ const amadeus = new Movie({titiel: 'Amadeus', year: 1986, rating: 'R'}) // this 
 amadeus.save() // this will take what we have done with data and save it to the DB
 ```
 - `.save()` is a method available for every instance of `new Movie`
+
+## Insert Many
+- This will take time so you have to work with callbacks or promises
+- Do not need to call `.save()` when using this method
+- Example of code in play
+```js
+Movie.insertMany([
+    {title: 'Amelie', year: 2001, score: 8.3, rating: 'R'}
+    {title: 'Alien', year: 1979, score: 8.1, rating: 'R'}
+    {title: 'The Iron Giant', year: 1999, score: 7.5, rating: 'PG'}
+])
+.then (data => {
+    console.log(data)
+})
+```
+
+## Finding With Mongoose
+- 
