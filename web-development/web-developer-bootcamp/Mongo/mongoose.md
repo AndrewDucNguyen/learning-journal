@@ -85,4 +85,4 @@ Movie.insertMany([
 ```
 
 ## Finding With Mongoose
-- 
+- Same concept
