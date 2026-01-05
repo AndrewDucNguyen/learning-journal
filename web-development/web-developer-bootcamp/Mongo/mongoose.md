@@ -85,4 +85,38 @@ Movie.insertMany([
 ```
 
 ## Finding With Mongoose
-- Same concept
+- Mongo Queries with a `.then()` but is not a promise
+- Then-able objects
+
+### Find
+```js
+// Find all, that returns query object that is thenable
+Movie.find({}).then(data => console.log(data))
+
+// Find movies where ratings are PG-13
+Movie.find({rating: 'PG-13'}).then(data => console.log(data))
+
+// Find movies where the year is greater than 2015
+Movie.find({year: {$gt: 2015}}).then(data => console.log(data))
+```
+
+- `.find()` will return an array of object even if it only finds one 
+
+### Find One
+- If we want just one object then we will use `.findOne()`
+```js
+// Find one, that returns query object that is thenable
+Movie.findOne({}).then(data => console.log(data))
+```
+- You are able to use callbacks with find methods
+    - you pass back the callback with `function(err, docs)` or using the `.exec()` method that will  give us a full/real promise not a thenable object
+
+### Find By ID
+- If you need to take a ID from the url to find in the DB
+```js
+// One way
+Movie.find({_id: '12345678'}).then(data => console.log(data))
+
+// Or
+Movie.findById('12345678').then(data => console.log(data))
+```
