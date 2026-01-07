@@ -127,4 +127,22 @@ Movie.findById('12345678').then(data => console.log(data))
 ```js
 // Update one or the first thing that matches the query
 Movie.updateOne({title: 'Amadeus'}, {year: 1984}).then(res => console.log(res))
+
+// Updating multiple movies at once
+// Find first
+Movie.find({title: {$in: ['Amadeus', 'Stand By Me']}})
+// Update
+Movie.updateMany({title: {$in: ['Amadeus', 'Stand By Me']}}, {score: 10}).then(res => console.log(res))
+```
+- instead of `.updateOne()` or `.updateMany()`, `.update()` could do both
+- Also have `.findOneAndUpdate()` where it finds and also updates
+    - You get back object with the new information instead of just a info that a n amount was updated
+```js
+Movie.findOneAndUpdate({title: `The Iron Giant`}, {score: 7.0}).then(res => console.log(res))
+```
+- You get the old object/version before it was found and updated though. This is the default behavior
+    - If we want to get the new object, we have to specifcy an option as the third argument
+    - `new: true` it is defaulted to `new: false`
+```js
+Movie.findOneAndUpdate({title: `The Iron Giant`}, {score: 7.0}).then(res => console.log(res), {new: true})
 ```
