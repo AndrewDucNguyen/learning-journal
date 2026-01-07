@@ -120,3 +120,11 @@ Movie.find({_id: '12345678'}).then(data => console.log(data))
 // Or
 Movie.findById('12345678').then(data => console.log(data))
 ```
+
+## Updating with Mongoose
+- Couple of options for updating like finding
+- Update doesn't return the updated data/list. It just tell how many things were updated or went wrong
+```js
+// Update one or the first thing that matches the query
+Movie.updateOne({title: 'Amadeus'}, {year: 1984}).then(res => console.log(res))
+```
