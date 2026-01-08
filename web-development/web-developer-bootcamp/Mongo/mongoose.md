@@ -218,3 +218,69 @@ bike.save()
 ```js
 Product.findOneAndUpdate({name : 'Tire Pump'}, {price: -19.99}, {new: true, runValidators: true})
 ```
+
+## Mongoose Validation Errors
+- You are able to setup a custom message on error
+
+```js
+const productSchema = new mongoose.schema({
+    name: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true,
+        min: [0, 'Price must be positive']
+    }
+})
+```
+
+## Model Instance Methods
+- Adding our own custom method to schema
+    - Defining or adding functionality onto what Mongoose already provides
+- Instance vs Class/Static method
+    - Instances of models are documents and is available on every instance
+```js
+// Creating our own method
+productSchema.methods.greet = function() {
+    console.log('Hello')
+}
+```
+- You want to use a traditional function rather than an arrow function because the value of `this` changes
+- Works on individual instances or products
+
+## Adding Model Static Methods
+```js
+productSchema.statics.fireSale = function() {
+    return this.updateMany({}, {onSale: true, price: 0}) // need to await since its a promise
+}
+```
+- Fancy way of finding, updating, creating, and deleting things
+- Built on top of existing model methods
+- Entire model instead of just and instance
+
+## Mongose Virtuals
+- Add properties to a schema that doesn't actually exist in the DB, but have access to thanks to Mongoose
+
+```js
+// Full name doesn't exist in DB but it'd be nice to have to access 
+
+// mongoose connection and etc...
+
+const personSchema = new mongoose.Schema({
+    first: String,
+    last: String
+})
+
+personSchema.virtual('fullName').get(function() {
+    return `${this.first} ${this.last}`
+})
+
+const Person = mongoose.model('Person', personSchema);
+
+const tammy = new Person({first: 'Tammy', last: 'Chow'})
+
+tammy.fullName // Tammy Chow
+```
+- This is great for the db because we have the data already but just need to put it together so it doesn't take up more space
