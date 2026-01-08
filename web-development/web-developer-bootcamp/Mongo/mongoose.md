@@ -146,3 +146,75 @@ Movie.findOneAndUpdate({title: `The Iron Giant`}, {score: 7.0}).then(res => cons
 ```js
 Movie.findOneAndUpdate({title: `The Iron Giant`}, {score: 7.0}).then(res => console.log(res), {new: true})
 ```
+
+## Deleting with Mongo
+- Similar to `.update()`, `.delete()` will not return the object. It will only return the number of modified items
+
+```js
+// Delete one
+Movie.deleteOne({title: 'Amelie'}).then(res => console.log(res))
+
+// Delete many
+Movie.deleteMany({year: {$gte: 1999}}).then(res => console.log(res))
+
+// If we want to get the data back of what was deleted
+Movie.findOneAndDelete({title: 'Alien'}).then(res => console.log(res))
+```
+
+## Mongoose Schema Validation
+```js
+// Creating a shop/product app
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/shopApp', )
+.then ( () => {
+    console.log('Connection open')
+})
+.catch ( (error) => {
+    console.log('Error', error)
+})
+
+// Short way of doing it
+const productSchema = new mongoose.schema({
+    name: String,
+    price: Number
+})
+
+// Long way of doing it. This is good if we want additional built in validations
+const productSchema = new mongoose.schema({
+    name: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    }
+})
+
+// Use it to be a model
+const Product = mongoose.model('Product', productSchema);
+
+const bike = new Product({name: 'Mountain Bike', price: 500)
+bike.save()
+.then( data => {
+    console.log(data)
+})
+.catch(err => {
+    console.log('error', err)
+})
+```
+
+## Additional Schema Constraints
+- Default: Default value for any variable
+- There are also individual constraints for specific types
+- Look at documentation for other options
+
+## Validating Mongoose Updates
+- Even if you have a valdation of min on a number, you can still use the update method in mongoose to bypass that and not really have it work
+- You need to tell Mongoose that we still want to apply the validation
+    - The validation is only for when it is created, not updated
+    - This is the case for many ORM/ODM
+- You need to tell the update method to run the validators with `runValidators: true`
+```js
+Product.findOneAndUpdate({name : 'Tire Pump'}, {price: -19.99}, {new: true, runValidators: true})
+```
