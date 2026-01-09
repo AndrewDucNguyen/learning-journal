@@ -284,3 +284,24 @@ const tammy = new Person({first: 'Tammy', last: 'Chow'})
 tammy.fullName // Tammy Chow
 ```
 - This is great for the db because we have the data already but just need to put it together so it doesn't take up more space
+
+## Defining Mongoose Middleware
+- Mongoose gives us the ability to run code before and after certain mongoose methods are called
+    - Removed
+    - Saved
+    - Update
+    - Etc.
+- Pre or post hook middleware
+- This is useful because when you remove a user for example, you may need to delete all their post, comments, etc over the years
+- You can use `.pre()` and `.post()`
+- We need to call `next()` within the callback function parameter and execute it or return a promise from the function
+
+```js
+personSchema.pre('save', async function() {
+    console.log('About to save')
+})
+
+personSchema.post('save', async function() {
+    console.log('Just saved')
+})
+```
