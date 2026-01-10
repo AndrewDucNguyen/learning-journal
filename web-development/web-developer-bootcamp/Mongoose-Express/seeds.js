@@ -48,6 +48,11 @@ const seedProducts = [
         name: 'Organic Mini Seedless Watermelon',
         price: 3.99,
         category: 'fruit'
+    },
+    {
+        name: 'Apple',
+        price: 1.99,
+        category: 'fruit'
     }
 ]
 
