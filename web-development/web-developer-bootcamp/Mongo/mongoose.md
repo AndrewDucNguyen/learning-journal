@@ -305,3 +305,6 @@ personSchema.post('save', async function() {
     console.log('Just saved')
 })
 ```
+
+## Filtering
+- Typically when it comes to filtering, you should use query string
