@@ -5,3 +5,5 @@
 - Make a separate folder for models so its separate from index.js
     - Typical application will have many models and can get messy
 - Easier to navigate
+
+## Middleware
