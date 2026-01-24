@@ -62,6 +62,7 @@ const Movie = mongoose.model('Movie', movieSchema)
 ```
 - Name is important, has to be singular and uppercase
 - Mongoose will take the model name and make it plural and make a db collection and make it lowercase
+- Typically the variable name will be the same as the `Model` name you're calling inside the `mongoose.model` function
 - You will have a class of the `Movie` schema
 ```js
 const amadeus = new Movie({titiel: 'Amadeus', year: 1986, rating: 'R'}) // this doesn't do anything yet with the DB
