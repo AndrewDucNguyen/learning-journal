@@ -275,4 +275,4 @@ const findTweet = async() => {
     3. How will I access it?
     4. What do I need frequently? 
     5. What do I need together?
-- This will dictate how we structure things
+- This will dictate how we structure the Mongo Schema
