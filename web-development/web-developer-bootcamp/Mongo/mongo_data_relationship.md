@@ -268,7 +268,7 @@ const findTweet = async() => {
 - https://www.mongodb.com/company/blog/mongodb/6-rules-of-thumb-for-mongodb-schema-design
 - Denormalize is duplicating a field/data on both the parent and the child
     - This is a big no no in a SQL database
-    - It's called **one-to-N**
+    - It's called **One-to-N**
 - Good questions to think about when designing a schema design:
     1. How am I going to use this data?
     2. Where am I going to access it?
