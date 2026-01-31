@@ -109,3 +109,18 @@ app.listen(3000, () => {
     console.log('Listening')
 })
 ```
+
+## Cookie Parser Middleware
+- After sending cookies, you can pull it out from `req.cookies`, but you can't pull it out of the box with express. You need to install a package called `cookie-parser`
+```js
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
+
+app.get('/greet', (req, res) => {
+    console.log(req.cookies) // will show the cookies stored
+})
+```
+
+## Signing Cookies
+- Digital signature - it is to verify its integrity and hasn't changed
+- 
