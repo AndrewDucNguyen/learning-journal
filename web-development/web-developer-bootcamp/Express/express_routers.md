@@ -141,3 +141,4 @@ app.get('/verifyfruit', (req, res) => {
     console.log(req.signedCookies) // this will display all signed 
 })
 ```
+- This will show the fruit in an object with what the cookie is, but if it has been tampered with, it will show false
