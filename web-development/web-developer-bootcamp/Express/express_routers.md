@@ -123,4 +123,21 @@ app.get('/greet', (req, res) => {
 
 ## Signing Cookies
 - Digital signature - it is to verify its integrity and hasn't changed
-- 
+- Signing cookies is not about hiding or encrypting information
+- Its to make sure the data being sent to the server is the data we acctual sent
+    - It hasn't been tampered with or changed after we have sent it
+
+```js
+const cookieParser = require('cookie-parser')
+app.use(cookieParser('thisismysecrete'))
+
+app.get('/getsignedcookie', (req, res) => {
+    res.cookie('fruit', 'grape', {signed: true})
+    res.send('hello')
+})
+
+app.get('/verifyfruit', (req, res) => {
+    console.log(req.cookies) // This will display all cookies that are NOT signed
+    console.log(req.signedCookies) // this will display all signed 
+})
+```
