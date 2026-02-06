@@ -91,3 +91,5 @@ const hassPassword = async (pw) => {
     const hash = await bcrypt.hash(pw, 12);
 }
 ```
+
+## Auth Demo Setup
