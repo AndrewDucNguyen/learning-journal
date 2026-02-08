@@ -52,7 +52,6 @@ app.post('/login', async (req, res) => {
 
     if(foundUser) {
         req.session.user_id = foundUser._id
-
         res.redirect('/secret')
     } else {
         res.redirect('/login')
