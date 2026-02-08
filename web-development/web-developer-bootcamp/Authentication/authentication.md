@@ -93,3 +93,11 @@ const hassPassword = async (pw) => {
 ```
 
 ## Auth Demo Setup
+- Need to install:
+    - DB
+    - EJS
+    - Express
+    - Bcrypt
+- Will be working through to show making users sign in before they can access specific routes
+- All example will be shown in the `/bcrypt`
+- You will use cookies/session to log someone in and keep them logged in
