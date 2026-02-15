@@ -134,3 +134,7 @@ app.get('/secret', verifyPassword , (req, res) => {
 
 ```
 - This is to check something on that route such as authentication or permission
+
+## Multer Middleware 
+- Express middleware to handle multipart/form-data
+- Used primarily for uploading files
