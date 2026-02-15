@@ -138,3 +138,4 @@ app.get('/secret', verifyPassword , (req, res) => {
 ## Multer Middleware 
 - Express middleware to handle multipart/form-data
 - Used primarily for uploading files
+- Default behavior of form for multipart/form-data cannot parse the data for files
