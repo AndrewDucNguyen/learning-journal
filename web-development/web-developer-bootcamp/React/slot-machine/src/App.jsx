@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Slots from './Slots'
+import ColorBoxContainer from './ColorBoxContainer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,6 +33,7 @@ function App() {
       <div>
         <Slots val1={1} val2={2} val3={3}/>
         <Slots val1={1} val2={1} val3={1}/>
+        <ColorBoxContainer colors={['red', 'blue', 'green', 'pink', 'purple', 'yellow', 'orange']} />
       </div>
     </>
   )
