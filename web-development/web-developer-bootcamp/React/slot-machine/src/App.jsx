@@ -33,7 +33,7 @@ function App() {
       <div>
         <Slots val1={1} val2={2} val3={3}/>
         <Slots val1={1} val2={1} val3={1}/>
-        <ColorBoxContainer colors={['red', 'blue', 'green', 'pink', 'purple', 'yellow', 'orange']} />
+        <ColorBoxContainer colors={['red', 'blue', 'green', 'pink', 'purple', 'yellow', 'orange', 'gray', 'white']} />
       </div>
     </>
   )
