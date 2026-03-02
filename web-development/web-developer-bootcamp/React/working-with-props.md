@@ -69,3 +69,8 @@ export default function DieRoll({numSides}){
 - You can set default values within the component grabbing the props
 - Look into closures and types
 - Function scope and async run
+
+## State
+- Store state at the highest level needed but no higher
+- You are able to pass state down to child
+- You are able to pass functions as props as well
