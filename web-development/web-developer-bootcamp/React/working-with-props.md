@@ -74,3 +74,4 @@ export default function DieRoll({numSides}){
 - Store state at the highest level needed but no higher
 - You are able to pass state down to child
 - You are able to pass functions as props as well
+- Working with multiple state, you can store it inside an object for the state
