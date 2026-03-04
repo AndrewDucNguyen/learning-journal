@@ -103,3 +103,50 @@ export default function Counter() {
     )
 }
 ```
+
+## Fetching Initial Data From an API
+- Fetching data on initial render
+    - Typically want to do this once to load data at the beginning or else it could take time
+- useState is setup in a way that it does not want the function to be a async function or else it'll just return `Promise`
+    - This is why you need to use useEffect
+- Use: Getting Data via AJAX on mount
+    - When a component renders, fetch data from an API
+        - Data fetching is asynchronous, and may take a moment to complete
+        - Want to show user something, like a loading message, while fetching
+    - To fetch correctly:
+        - Have an effect that runs only once
+        - Inside effect, when API calls is finished, will set state & re-render
+- useEffect does not want us to call an async function but theres a work around
+```jsx
+import { useState, useEffect } from 'react'
+const RANDOM_QUOTE_URL = "https://inspo-quotes-api.herokuapp.com/quotes/random"
+
+export default function QuoteFetcher() {
+    const [quote, setQuote] = useState({text:"", author:""})
+
+    useEffect(() => {
+        async function getInitialQuote() {
+            const resonse = await fetch(RANDOM_QUOTE_URL)
+            const jsonResponse = await response.json()
+            const randomQuote = jsonResponse.quote;
+            setQuote(randomQuote);
+        }
+        getInitialQuote();
+    }, [])
+
+    async function fetchQuote() {
+        const resonse = await fetch(RANDOM_QUOTE_URL)
+        const jsonResponse = await response.json()
+        const randomQuote = jsonResponse.quote;
+        setQuote(randomQuote);
+    }
+
+    return(
+        <div>
+            <button onClick={fetchQuote}>Get Quote Using handler</button>
+            <h1>{quote.text}</h1>
+            <h2>{quote.author}</h2>
+        </div>
+    )
+}
+```
