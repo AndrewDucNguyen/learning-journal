@@ -65,3 +65,41 @@ export default function Counter() {
 ```
 - my effect always run after first render
 - by default, my effect runs after all re-renders
+
+## useEffect Dependencies
+
+### 2nd Argument to useEffect
+- useEffect(myCallbackFn);
+    - Runs myCallbackFn effect after every render
+- Can pass in 2nd argument in the form of an array
+    - useEffect(myCallbackFn, [productId, userId])
+        - Runs myCallbackFn effect only if productId of userId vars changed
+    - useEffect(myCallbackFn, [ ])
+        - Runs myCallbackFn effect only the first time (on mount)
+```jsx
+import { useState, useEffect } from 'react'
+export default function Counter() {
+    const [count, setCount] = useState(0)
+    const [name, setName] = useState("")
+
+    useEffect(function myEffect() {
+        console.log('Effect called')
+    }, [count]) // this will only run if count is changed and not name
+
+    const increment = () => {
+        setCount((c) => c + 1)
+    }
+
+    const handleChange () => {
+        setName(e.target.value)
+    }
+
+    return (
+        <div>
+            <h1>{count}</h1>
+            <button onClick={increment}>+1</button>
+            <input onChange={handleChange} value={name} type="text" />
+        </div>
+    )
+}
+```
