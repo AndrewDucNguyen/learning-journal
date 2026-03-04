@@ -150,3 +150,33 @@ export default function QuoteFetcher() {
     )
 }
 ```
+
+## Adding a Loader
+```jsx
+import { useState, useEffect } from 'react'
+const RANDOM_QUOTE_URL = "https://inspo-quotes-api.herokuapp.com/quotes/random"
+
+export default function QuoteFetcher() {
+    const [quote, setQuote] = useState({text:"", author:""})
+    const [isloading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchQuote() {
+            const resonse = await fetch(RANDOM_QUOTE_URL)
+            const jsonResponse = await response.json()
+            const randomQuote = jsonResponse.quote;
+            setQuote(randomQuote);
+            setIsLoading(false)
+        }
+        fetchQuote()
+    }, [])
+
+    return(
+        <div>
+            {isLoading && <p>Loading...</p>}
+            <h1>{quote.text}</h1>
+            <h2>{quote.author}</h2>
+        </div>
+    )
+}
+```
