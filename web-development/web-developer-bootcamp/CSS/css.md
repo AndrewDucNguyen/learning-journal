@@ -16,3 +16,5 @@
     - ::first-letter
     - ::first-line
     - ::selection
+
+- Sometimes this is used interchangably, but there is a slight differnce between them
