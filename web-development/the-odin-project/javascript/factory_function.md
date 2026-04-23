@@ -40,3 +40,15 @@ function createPlayer(name, level) {
   return Object.assign({}, user, { increaseLevel });
 }
 ```
+
+## IIFEs
+- Immediately Invoked Function Expression
+- Functions that are called immediately
+```js
+// This is a function expression
+() => console.log("foo");
+
+// The function expression is now an IIFE!
+// Although this one is not particularly useful of course
+(() => console.log("foo"))();
+```
