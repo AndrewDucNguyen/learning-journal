@@ -264,6 +264,8 @@ export default {
   },
 };
 ```
+- Source map is important because if any error messages occur, we won't necessarily match up to the correct files and line numbers from development code
+- We also won't be able to find original untouched code, making the Chrome debugger harder to user. Source map solves that
 - Only auto-restarts when it detects any changes to files we import intout the JavaScript bundle, so the HTML template will be ignored..
     - Thats why we add it to the dev server's array of watched files
 - Just run this command after
@@ -271,3 +273,27 @@ export default {
 npx webpack serve
 ```
 - Webpack-dev-server only reads your webpack configuratio nwhen it starts. If the webpack config is changed while the dev server is running, it will not reflect. You will have to restart the server
+
+## Core concepts
+- Entry
+    - Indicates which module webpack should use to begin building out its internal dependency graph
+    - Webpack will figure out which other modules and libraries the entry point depends on
+    - Default is `./src/index.js`
+- Output
+    - Tells webpack where to emit the bundles it creates and how to name these files
+    - Defaults to `./dist/main.js` for main output file and to the `./dist` folder for any other generated file
+- Loaders
+    - Out of the box, webpack only understands JavaScript and JSON files. Loader allows webpack to process other types of files and convert them into valid modules that can be consumed by application and added to dependency graph
+    - High level, loaders have two properties
+        1. `test`: identifies which file/files should be transformed
+        2. `use`: indidcates which loader should be used to do the transforming
+- Plugins
+    - Can be leveraged to perform a wider range of tasks like bundle optimization, assest management, and injection of environment variables
+    - Need to import a plugin and add it to the `plugins` array to use
+- Mode
+    - Can enable webpacks built-in optimization that correspond to each environment.
+    - Default is `production`
+    - Has three modes
+        1. `development`
+        2. `production`
+        3. `none`
