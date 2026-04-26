@@ -297,3 +297,20 @@ npx webpack serve
         1. `development`
         2. `production`
         3. `none`
+
+## npm
+- `prepublish`: This script runs before the package is packed and published, and is used to prepare the package for distribution.
+
+- `prepare`: This script runs both during local development and when the package is installed as a dependency of another package. It is used to prepare the package for use, such as by building or compiling the code.
+
+- `preinstall`: This script runs before the package is installed and is used to perform any necessary setup tasks before dependencies are installed.
+
+- `postinstall`: This script runs after the package is installed and is used to perform any necessary setup tasks after dependencies are installed.
+
+- `preuninstall`: This script runs before the package is uninstalled and is used to perform any necessary cleanup tasks before dependencies are removed.
+
+- `postuninstall`: This script runs after the package is uninstalled and is used to perform any necessary cleanup tasks after dependencies are removed.
+
+- `preversion`: This script runs before the version of the package is updated and is used to perform any necessary tasks before the version is changed.
+
+- `postversion`: This script runs after the version of the package is updated and is used to perform any necessary tasks after the version is changed.
