@@ -9,3 +9,5 @@
 
 ## Loosely coupled objects
 - To make sure that your individual objects can stand alone as much as possible
+- SOLID principles
+
