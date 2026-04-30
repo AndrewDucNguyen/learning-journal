@@ -54,3 +54,9 @@ class CalorieTracker {
 ```
 - This makes it easier to follow and read
     - If not, it makes it harder to read cause too many logic and things that could make it break inside a single file
+
+## Open/Closed Principle
+- This is one of the hardest to understand
+- If we change something outside of a class, function, or module, we should never have to change something inside one of those
+    - Break it into seprate classes
+- We don't need to always follow, but it would be great if we can
