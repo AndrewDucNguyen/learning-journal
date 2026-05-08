@@ -60,3 +60,15 @@ class CalorieTracker {
 - If we change something outside of a class, function, or module, we should never have to change something inside one of those
     - Break it into seprate classes
 - We don't need to always follow, but it would be great if we can
+= When you see a switch statement, its usually a violation to the open/closed principle
+    - When you change the argument/type outside of the switch statement, you have to add/change the case inside the switch statement
+- When you have a switch statement or a lot of if statements, you can break it out into individual classes/functions that has the logic in them
+- This makes it easier to maintain 
+
+## Liskov Substitution
+- Most important principle for writing OOP code
+- If you have a class defined somewhere in your code and another class is extending it - you should be able to replace that class with the subclass and it should work fine
+- This could get messy, so we should look to compisition
+
+### Composition vs Inheritance
+- 
