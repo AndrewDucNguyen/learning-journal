@@ -71,4 +71,69 @@ class CalorieTracker {
 - This could get messy, so we should look to compisition
 
 ### Composition vs Inheritance
-- 
+- Composition:
+```js
+function swimmer ({ name }) {
+    return {
+        swim: () => console.log(`${name} swam`)
+    }
+}
+
+function swimmingMonsterCreator(name) {
+    const monster = { name: name }
+
+    return {
+        ...monster,
+        ..swimmer(monster)
+    }
+}
+
+const obj = swimmingMonsterCreator('Monster')
+obj.swim()
+```
+- Composition is all function, no classes. Super flexible and not stuck with classes and extension
+
+## Interface Segregation
+- Theres no actual interface inside JavaScript
+- You achieve the interface inside JavaScript with classes
+```js
+class Entity {
+    constructor(name, attackDamage, health) {
+        this.name = name;
+        this.attackDamage = attackDamage;
+        this.health = health;
+    }
+
+    move() {
+        console.log(`${this.name} moved`)
+    }
+
+    attack(targetEntity) {
+        // Attack logic..
+    }
+
+    takeDamage(amount) {
+        // Damage logic...
+    }
+}
+
+class Character extends Entity {
+
+}
+
+class Wall extends Entity {
+    constructor(name, health) {
+        super(name, 0, health)
+    }
+
+    move() {
+        return null
+    }
+
+    attack() {
+        return null
+    }
+}
+```
+- Theres a problem because some of the class extending entity doesn't use everything
+- We solve this by breaking apart the entity class to smaller components
