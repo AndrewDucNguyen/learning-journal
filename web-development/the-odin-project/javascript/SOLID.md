@@ -137,3 +137,7 @@ class Wall extends Entity {
 ```
 - Theres a problem because some of the class extending entity doesn't use everything
 - We solve this by breaking apart the entity class to smaller components
+
+## Dependency Inversion
+- Instead of a store directly calling the Stripe API and making it harder to change down the road, you make a middleware or a payment processor in the middle that the store and stripe API talks to
+- Adapter or façade pattern
