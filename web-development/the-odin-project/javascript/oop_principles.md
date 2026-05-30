@@ -18,3 +18,7 @@
     - Another goal was that there should not be a single point of failure anywhere in the application. 
 - These patterns are often a variation of the so-called observer pattern.
     - One such variation is referred to as the Pub/Sub or Publish/Subscribe pattern.
+
+## Composition vs Inheritance
+- Inheritance: What they are
+- Composition: What they do
