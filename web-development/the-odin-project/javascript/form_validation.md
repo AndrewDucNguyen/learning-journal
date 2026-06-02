@@ -1,0 +1,17 @@
+# Form Validation with JavaScript
+- Constraint Validation API: a way to validate forms on the frontend with JS
+  - Consists of methods and properties available on the follow form element DOM interfaces:
+    - HTMLButtonElement (represents a `<button>` element)
+    - HTMLFieldSetElement (represents a `<fieldset>` element)
+    - HTMLInputElement (represents an `<input>` element)
+    - HTMLOutputElement (represents an `<output>` element)
+    - HTMLSelectElement (represents a `<select>` element)
+    - HTMLTextAreaElement (represents a `<textarea>` element)
+  - Following properties available on elements above:
+    - `validationMessage`: Returns localized message describing the validation constraints that the control doesn't satisfy
+    - `validity`: Returns `ValidityState` object that contains several properties describing the validity state of the element
+    - `willValidate`: Returns `true` if the element will be validated when the form is submitted; `false` otherwise
+  - Constraint Validation API will alos make the following methods available on the elements above and `form` element:
+    - `checkValidity()`: Returns `true` if the element's value has no validity problems; `false` otherwise
+    - `reportValidity()`: Reports invalid field(s) using events. This method is useful in combination with `preventDefault()` in an `onSubmit` event handler.
+    - `setcustomValidity(message)`: Adds a custom error message to the element; if you set a custom error message, the element is considered to be invalid, and the specified error is displayed. 
