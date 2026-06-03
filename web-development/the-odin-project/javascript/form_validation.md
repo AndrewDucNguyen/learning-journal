@@ -14,4 +14,4 @@
   - Constraint Validation API will alos make the following methods available on the elements above and `form` element:
     - `checkValidity()`: Returns `true` if the element's value has no validity problems; `false` otherwise
     - `reportValidity()`: Reports invalid field(s) using events. This method is useful in combination with `preventDefault()` in an `onSubmit` event handler.
-    - `setcustomValidity(message)`: Adds a custom error message to the element; if you set a custom error message, the element is considered to be invalid, and the specified error is displayed. 
+    - `setcustomValidity(message)`: Adds a custom error message to the element; if you set a custom error message, the element is considered to be invalid, and the specified error is displayed.
