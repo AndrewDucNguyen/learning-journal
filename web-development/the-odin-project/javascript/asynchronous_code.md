@@ -10,6 +10,7 @@
     - Things that have to talk to hard drives or network will be asynchronous
     - Things that access memory or do some work on teh CPU will be synchronous
 - Use callbacks when you don't know when some async operation will complete, but you do know where the ooperation will complete
+- Talking to a hard drive is about 100,000 times slower than talking to memory
 
 ## Promises
 - There are multiple ways to handle asynchronous code in JS
