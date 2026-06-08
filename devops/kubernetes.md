@@ -87,8 +87,49 @@
 - How to interact with cluster?
     - Managing processes are done by master nodes
     - Two types of nodes:
-        - Master
-            - Master processes: 4 processes
-                - API server
-                - 
-        - Slave
+        - Master nodes
+            - Master processes: 4 processes that run on every master node
+                - API server: like a cluster gate. Gets the inintial request/query and acts as a gate keeper for authentication
+                    - Flow: some request -> API Server -> validates request -> other processes... -> Pod
+                    - Load balancer
+                - Scheduler
+                    - Schedule new Pod -> API Server -> Scheduler -> Where to put the Pod? -> Kubelet
+                    - Scheduler will just decides on which node a new Pod will be scheduled
+                        - The process the does it Kubelet
+                - Controller Manager:
+                    - Crucial component because it will detect when nodes die and reschedule it as soon as possible
+                    - Detects cluster state changes
+                    - Controller Manager -> Scheduler -> Kubelet
+                - ETCD
+                    - Key valued store for a cluster state
+                    - Cluster brain
+                    - Cluster changes get stored in the key value store
+                        - Application data is not stored in etcd
+                - Typically needs less resources such as CPU | RAM | Storage
+        - Slave/Worker nodes:
+            - Needs more resources 
+
+## Minikube & Kubectl
+- Minikube
+    - One node cluster where Master and Node processes run on one machine
+    - Can have docker pre-installed
+    - Runs through a virtual box/hyper-visor
+        - Creates Virtual box
+        - Node runs in that Virtual Box
+        - 1 Node K8's cluster
+        - For testing
+- Kubectl
+    - Interacts with clusters, Pod, Kubernetes components 
+        - Creating things on that Node
+    - Command line tool for Kubernetes clusters
+    - API server is the main entry point into the cluster
+        - Enables interaction with cluster
+        - 3 different types of clients
+            - UI
+            - API
+            - CLI: most powerful of the 3 clients
+    - Enable Pods to run on node
+        - Create pods/services
+        - Destroy pods
+    - Isn't just for Minikube clusters, could also use on Cloud clusters
+    
