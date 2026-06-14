@@ -146,7 +146,7 @@
             Service
             Ingress
         ```
-- DevOps Directive https://www.youtube.com/watch?v=X48VuDVv0do
+- DevOps Directive https://www.youtube.com/watch?v=2T86xAtR6Fo
         - Goal: Understand these words without taking notes. Just understand vocabulary:
         ```
             Docker runs containers
@@ -189,3 +189,11 @@
 
 
 ### Phase 7 - Understand production patterns
+
+
+Okay help me structure everything of how to go about learning this so I have a good understanding and able to do it myself. The videos I'm looking at:
+- The 15min tutorial by Nana
+- The playlist by Nana
+- https://www.youtube.com/watch?v=2T86xAtR6Fo&t=3095s
+- https://www.youtube.com/watch?v=X48VuDVv0do&pp=ygUTa3ViZXJuZXRlcyB0dXRvcmlhbA%3D%3D
+- https://www.youtube.com/watch?v=s_o8dwzRlu4&t=104s&pp=ygUTa3ViZXJuZXRlcyB0dXRvcmlhbA%3D%3D
