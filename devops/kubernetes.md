@@ -87,7 +87,7 @@
 - How to interact with cluster?
     - Managing processes are done by master nodes
     - Two types of nodes:
-        - Master nodes
+        - Master/Control nodes
             - Master processes: 4 processes that run on every master node
                 - API server: like a cluster gate. Gets the inintial request/query and acts as a gate keeper for authentication
                     - Flow: some request -> API Server -> validates request -> other processes... -> Pod
