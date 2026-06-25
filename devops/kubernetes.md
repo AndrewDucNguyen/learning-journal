@@ -133,67 +133,28 @@
         - Destroy pods
     - Isn't just for Minikube clusters, could also use on Cloud clusters
     
-## Structured Learning:
+## Ingress
+- Port forwarding (external) to internal service
 
-### Phase 1 - Build mental model
-- Nana's 15-minute Kubernetes video
-    - Goal: Understand these words without taking notes. Just understand vocabulary:
-        ```
-            Cluster
-            Node
-            Pod
-            Deployment
-            Service
-            Ingress
-        ```
-- DevOps Directive https://www.youtube.com/watch?v=2T86xAtR6Fo
-        - Goal: Understand these words without taking notes. Just understand vocabulary:
-        ```
-            Docker runs containers
-            Kubernetes runs Pods
-            Deployments manage Pods
-            Services expose Pods
-            Ingress exposes Services
-        ```
-### Phase 2 - Learn the objects I'll use
-- Use Nana's playlist, but don't watch everything
-    - Focus on:
-        * Pods
-        * Deployments
-        * Services
-        * Namespaces
-        * ConfigMaps
-        * Secrets
-        * Ingress
+## Ingress Controller
+- Evaluates all the rules
+- Manages redirections
+- Entrypoint to cluster
+- Many third-party implementation
+    - Kubernetes has an internal one called K8s Nginx Ingress Controller
+- Have separate server for Proxy Server to hit the ingress controller externally. Everything else will not be open externally
 
-### Phase 3 - Install K3s
-- https://www.youtube.com/watch?v=2T86xAtR6Fo
-- Age matters more with these
-- Focus On:
-    - Install K3s
-    - Get kubectl working
-    - View nodes
-    - View pods
-
-### Phase 4 - Deploy the current UI
-
-### Phase 5 - Learn Helm
-- https://www.youtube.com/watch?v=s_o8dwzRlu4
-- Learn helm create myapp
-- Look at:
-    - values.yaml
-    - templates/deployment.yaml
-    - templates/service.yaml
-
-### Phase 6 - Convert nginx to your frontend
-
-
-### Phase 7 - Understand production patterns
-
-
-Okay help me structure everything of how to go about learning this so I have a good understanding and able to do it myself. The videos I'm looking at:
-- The 15min tutorial by Nana
-- The playlist by Nana
-- https://www.youtube.com/watch?v=2T86xAtR6Fo&t=3095s
-- https://www.youtube.com/watch?v=X48VuDVv0do&pp=ygUTa3ViZXJuZXRlcyB0dXRvcmlhbA%3D%3D
-- https://www.youtube.com/watch?v=s_o8dwzRlu4&t=104s&pp=ygUTa3ViZXJuZXRlcyB0dXRvcmlhbA%3D%3D
+## Services
+- Each Pod has its own IP address, but Pods are ephemeral
+    - Ephemeral means that are destroyed frequently
+    - Each time its destroyed, Pods get new IP address and we need to adjust the IP address everytime if we use the Pod IP
+    - Instead of using that, we use Services which is a solution to a stable IP address
+        - It is infront of the Pod
+- Services provides load balancing
+    - Clients can call a single IP address to access different pods instead of individually accessing different IP addresses
+- 4 different types of services
+    1. ClusterIP Services
+        - Most common because its the default
+    2. Headless Services
+    3. NodePort Services
+    4. LoadBalancer Services
