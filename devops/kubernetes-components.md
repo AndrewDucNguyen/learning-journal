@@ -64,7 +64,59 @@
     - It is in declarative form; `Is == Should`
 - Controller Manager checks: `desired state == actual state`
 
-### Services / Ingress
+## Kubernetes Architecture
+- Talk about in depth the difference between Master/Control node and worker node
+
+### Worker machine/node
+- Example with 1 node with 2 application pods running on it
+- Each node has multiple pods on it
+- 3 processes must be installed on every Node
+    - Work nodes do the actual work
+    1. Container runtime
+    2. Kubelet 
+        - Interacts with both the container and node
+        - Starts the pod with a container inside
+        - Services
+            - Communication
+            - Catches the request directed to the Pod/Application like DB, and forwards it to the respected pod
+    3. Kube proxy
+        - Forwarding requests
+        - Makes sure the communication works in a performant way and the correct node/machine
+
+### How to interact with clusters
+- How to:
+    1. Schedule pod?
+    2. Monitor?
+    3. Re-schedule/re-start pod?
+    4. Join a new node?
+    - Managing processes are done by Master/Control node
+
+### Master/Control Node/Processes
+- Has different processes running inside. There are 4 processes on every master node
+    1. API Server
+        - Interact using client side using cluster gateway
+        - Acts as a gatekeeper for authentication
+        - When some request comes in to the cluster, it'll hit the **API server**, the **API server** will validate the request and forward it to other processes in order to schedule the Pod
+        - Good for security because we only have 1 entrypoint for the cluster
+    2. Scheduler
+        - When you send the **API server** a request to schedule a new pod, it'll schedule new Pod then send it to validate the request in the **API Server** then hand it over to the **Scheduler** then it'll start a new Pod in the worker node
+        - Has intelligent way to decide on which worker node the next pod will be scheduled
+        - Scheduler just decides on which Node new Pod should be scheduled
+        - The process that actual does the scheduling or starts the pod is the **Kubelet**
+    3. Controller Manager
+        - Detects cluster state changes
+            - Dies, restarts, etc
+        - Once it detects a state change, the **Controller Manager** will send a request to the **Scheduler** to reschedule the dead pods then the same process happens, where the **Scheduler** decides which worker node to put it on. Whatever node has the most space or least amount of used resource
+    4. etcd
+        - Key value store of a cluster state
+        - Cluster Brain basically
+            - All the mechanism (scheduler, etc) works because of its data
+        - All the changes gets saved/updated in this key value store (will keep when the node dies or etc)
+        - What is not stored in here is the actual application data
+            - Just cluster state information for the master/control to communication with worker and vice versa
+- Cluster is usually made up of multiple master/control
+
+## Services / Ingress
 
 ### Secrets 
 
