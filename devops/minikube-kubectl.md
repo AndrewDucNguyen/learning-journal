@@ -18,4 +18,29 @@
 - Isn't just for minikube, but works for any type of kubernetes cluster
 
 ## Basic Kubectl Commands
-- 
+- Create and debug Pods in a minikube cluster
+
+### CRUD commands
+- Create deployment             `kubectl create deployment [name]`
+    - Deployment is an abstraction layer over Pods. You don't create pods directly, you create deployment with pods underneath it
+    - `kubectl create deployment nginx-depl --image=nginx` - This creates a deployment with a pod called nginx with the nginx image
+        - This is the blueprint for creating pods
+        - Most basic configuration for deployment
+    - Another layer thats managed by Kubernetes is called `replicaset`
+    - Layers of Abstraction:
+        - Deployment
+        - ReplicaSet
+        - Pod
+        - Container
+    - Everythign below Deployment is handled by Kubernetes
+    - Each abstraction is managed by the layer above it
+- Edit deployment               `kubectl edit deployment [name]`
+    - You will get an aut-generated configuration file with default values
+- Delete deployment             `kubectl delete deploye [name]`
+
+### Status of different K8's components
+`kubectl get nodes | pod | services | replicaset | deployment`
+
+### Debugging pods
+- Log to console:               `kubectl logs [pod name]`
+- Get interactive Terminal      `kubectl exec -it [pod name] -- bin/bash`
