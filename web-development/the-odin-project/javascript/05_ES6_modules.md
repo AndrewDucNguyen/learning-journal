@@ -1,4 +1,5 @@
 ## Before ES6 Modules
+- ES6 is sometimes referred to as ES2015
 - If we have a HTML with two js files
 ```html
 <script src="one.js" defer></script>
@@ -28,8 +29,8 @@ const greeting = (() => {
 
 ## ES6 modules
 - More control over things. Each file has its own priate scope by default. We get to choose what things we export from that file and choose what to import from other files.
-- Just because we export something doesn't mean it's automatically available elsewhere; it will only be available in another file if we explicitly import it
 
+- Just because we export something doesn't mean it's automatically available elsewhere; it will only be available in another file if we explicitly import it
 
 ### Import and Export
 - Two types of importing and exporting. They do the same thing but slightly differenlty.
@@ -98,3 +99,9 @@ console.log(farewell); // "Bye bye, Odinite!"
 ### CommonJS
 - Uses `require` and `module.exports` instead of `import` and `export`
 - designed to use with Node.js
+
+### Gains from ES6
+- Import & exports
+- Default exports
+- Named exports
+- Entry points

@@ -1,6 +1,7 @@
 # Webpack
 - ES6 and NPM can reduce performance especially as more third party files are imported
-- bundlers provide us wit hthe power to process and optimize our code
+
+- bundlers provide us with the power to process and optimize our code
     - The cost is that we need to confire a bundler
 
 ## Bundling

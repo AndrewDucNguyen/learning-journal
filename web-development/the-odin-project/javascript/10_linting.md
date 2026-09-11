@@ -9,7 +9,7 @@
 
 ## Linting
 - Linters are tools that will scan your code with a set of style rules and will report any errors to you that they find
-    - They acould even auto-fix the errors in some cases
+    - They could even auto-fix the errors in some cases
 - Most common one for JS is ESLint
     - ESLint is installed as a dev dependency in projects. This allows you to run checks on any files via the command line
 - You'll typically look at docs for these configurations
