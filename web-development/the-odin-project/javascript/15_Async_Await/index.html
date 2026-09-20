@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Await</title>
+</head>
+<body>
+    <h1>Async Await</h1>
+    
+    <form id="searchForm" onsubmit="event.preventDefault(); getGifs()">
+        <input type="text" id="search">
+        <button id="btn">Search</button>
+    </form>
+    <img src="#">
+
+
+    <script>
+        const button = document.querySelector('#btn');
+        const img = document.querySelector('img');
+        const input = document.querySelector('#search');
+
+        // Old Promise method
+        function searchGifs() {
+            fetch(`https://api.giphy.com/v1/gifs/translate?api_key=viW9uYJ9Lm8YS2U1f07nlIPeFwSYneiK&s=${input.value}&rating=g`)
+            .then(function(response) {
+                return (response.json());
+            })
+            .then(function(response){
+                img.src = response.data.images.original.url;
+            })
+            .catch(function(error) {
+                console.log(error)
+            });
+        }
+        
+        // New Async/Await method
+        async function getGifs() {
+            const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=viW9uYJ9Lm8YS2U1f07nlIPeFwSYneiK&s=${input.value}&rating=g`)
+            console.log(response)
+            const image = await response.json();
+            img.src = image.data.images.original.url;
+        }
+      </script>
+</body>
+</html>
