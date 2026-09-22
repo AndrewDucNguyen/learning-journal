@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+
+<body>
+    <h1>Weather App</h1>
+
+    <form id="searchForm" onsubmit="event.preventDefault(); getWeather()">
+        <label for="location">Enter a location:</label>"
+        <input type="text" id="location" placeholder="Location...">
+
+        <label for="date1">Enter a start date:</label>
+        <input type="date" id="date1" />
+
+        <label for="date2">Enter an end date:</label>
+        <input type="date" id="date2" />
+
+        <button id="btn">Search</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
