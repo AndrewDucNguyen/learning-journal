@@ -6,3 +6,5 @@
 - Predictable for team
 - CI integration
 - Auto run for infrastructure
+
+## Install test running
