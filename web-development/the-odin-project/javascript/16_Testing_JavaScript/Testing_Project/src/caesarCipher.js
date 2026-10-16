@@ -1,5 +1,6 @@
 export const caesarCipher = (string, shift) => {
-    return string
+    splitString = string.split("");
+    console.log(splitString)
 }
 
 console.log(caesarCipher('xyz', 3))
