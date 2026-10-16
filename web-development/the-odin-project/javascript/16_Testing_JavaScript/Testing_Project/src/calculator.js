@@ -12,8 +12,3 @@ export const calculator = {
         return num1 * num2
     }
 }
-
-console.log(calculator.Add(2, 2))
-console.log(calculator.Subtract(2, 2))
-console.log(calculator.Divide(2, 2))
-console.log(calculator.Multiply(2, 2))

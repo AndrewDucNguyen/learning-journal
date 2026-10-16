@@ -1,3 +1,1 @@
-const analyzeArray = () => {
-
-}
+console.log('Hello, World!')
