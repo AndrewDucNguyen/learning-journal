@@ -26,3 +26,11 @@ Side effects include, but are not limited to:
 - Getting the current time
 
 Not all functions should be or needs to be pure
+
+## Why Pure Functions are Important In JavaScript
+They're heavily used within Functional Programming and in libraries
+
+## Testability and Refactoring
+Another major benefit of using pure functions is that they're immediately testable.
+
+This makes maintaining and refactoring the code easier as well.
