@@ -164,3 +164,82 @@ console.log(filterTestFn.mock.calls[1][0]); // 12
 Most real-world examples will involve getting ahold of the mock function on dependent component and configuring it, but the concept/technique is still the same.
 
 Try to avoid the temptation to implement logic inside any function that is not being tested directly
+
+## Mocking Modules
+Suppose we have a class that fetches users from our API. The class uses axios to call the API then returns the data attribute which contains all the users:
+
+```js
+import axios from 'axios';
+
+class Users {
+  static all() {
+    return axios.get('/users.json').then(resp => resp.data);
+  }
+}
+
+export default Users;
+```
+
+To test this method without hitting the API, we use `jest.mock(...)` function to automatically mock the axios module
+
+Once we mock the module, we can provide a `mockResolvedValue` for `.get` that returns the data we want in our test to assert against. 
+
+```js
+import axios from 'axios';
+import Users from './users';
+
+jest.mock('axios');
+
+test('should fetch users', () => {
+  const users = [{name: 'Bob'}];
+  const resp = {data: users};
+  axios.get.mockResolvedValue(resp);
+
+  // or you could use the following depending on your use case:
+  // axios.get.mockImplementation(() => Promise.resolve(resp))
+
+  return Users.all().then(data => expect(data).toEqual(users));
+});
+```
+
+## Mocking Partials
+Subsets of a module can be mocked and the rest of the module can keep their actual implementation:
+
+```js
+// foo-bar-baz.js
+export const foo = 'foo';
+export const bar = () => 'bar';
+export default () => 'baz';
+```
+
+```js
+//test.js
+import defaultExport, {bar, foo} from '../foo-bar-baz';
+
+jest.mock('../foo-bar-baz', () => {
+  const originalModule = jest.requireActual('../foo-bar-baz');
+
+  //Mock the default export and named export 'foo'
+  return {
+    __esModule: true,
+    ...originalModule,
+    default: jest.fn(() => 'mocked baz'),
+    foo: 'mocked foo',
+  };
+});
+
+test('should do a partial mock', () => {
+  const defaultExportResult = defaultExport();
+  expect(defaultExportResult).toBe('mocked baz');
+  expect(defaultExport).toHaveBeenCalled();
+
+  expect(foo).toBe('mocked foo');
+  expect(bar()).toBe('bar');
+});
+```
+
+## Mock Implementations
+There are cases where it's useful to go beyond the ability to specify return values and full-on replace the implementation of a mock function.
+
+This can be done with jest.fn or the mockImplementationOnce method on mock functions.
+
