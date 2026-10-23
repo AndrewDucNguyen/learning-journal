@@ -66,3 +66,5 @@ caveat:
 
 ## Conclusion:
 Be a minimalist
+Trust
+Insist on simplicity
