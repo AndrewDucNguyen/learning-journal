@@ -157,3 +157,31 @@ A new execution context is created, and previous one is pushed on top of the sta
 There are two old context and 1 currently running for `pow(2, 1)`
 
 ## The exit
+For execution of `pow(2, 1)`, it hits the first if contion `n == 1`
+
+```js
+function pow(x, n) {
+  if (n == 1) {
+    return x;
+  } else {
+    return x * pow(x, n - 1);
+  }
+}
+```
+
+There are no more nested calls, so the function finishes and returns `2`. 
+
+As the function finishes, the execution context is no longer needed, so it is removed from the memory and the previous one is restored off the top of the stack
+
+- **`Context: {x: 2, n: 2, at line 5} call: pow(2, 2)`**
+- `Context: {x: 2, n: 3, at line 5} call: pow(2, 3)`
+
+Execution of `pow(2, 2)` is resumed with the result from the subcall `pow(2, 1)` so it is able to finish the evaluation of `x * pow(x, n - 1)` returning 4
+
+Then previous context is restored
+
+- **`Context: {x: 2, n: 3, at line 5} call: pow(2, 3)`**
+
+Once it finishes, we have the result of `pow(2, 3) = 8`
+
+The recursion depth in this case was: **3**
