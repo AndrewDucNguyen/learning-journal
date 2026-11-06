@@ -185,3 +185,10 @@ Then previous context is restored
 Once it finishes, we have the result of `pow(2, 3) = 8`
 
 The recursion depth in this case was: **3**
+
+Recursion depth = maximal number of context in stack
+
+Contexts take memory. A loop-based algorithm is more memory-saving. Any recursion can be rewritten as a loop
+
+## Recursive traversals 
+A
