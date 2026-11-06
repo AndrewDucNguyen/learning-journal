@@ -191,4 +191,162 @@ Recursion depth = maximal number of context in stack
 Contexts take memory. A loop-based algorithm is more memory-saving. Any recursion can be rewritten as a loop
 
 ## Recursive traversals 
-A
+Imagine we have a company:
+```js
+let company = {
+  sales: [{
+    name: 'John',
+    salary: 1000
+  }, {
+    name: 'Alice',
+    salary: 1600
+  }],
+
+  development: {
+    sites: [{
+      name: 'Peter',
+      salary: 2000
+    }, {
+      name: 'Alex',
+      salary: 1800
+    }],
+
+    internals: [{
+      name: 'Jack',
+      salary: 1300
+    }]
+  }
+};
+```
+
+If we want a function to get the sum of all salaries, it is an iterative approach and note simple. For loops, won't work because there are nested subloops to iterate over. So we need recursion
+
+There are two possible cases:
+1. Either it’s a “simple” department with an array of people – then we can sum the salaries in a simple loop.
+
+2. Or it’s an object with N subdepartments – then we can make N recursive calls to get the sum for each of the subdeps and combine the results.
+
+Here is the result from that:
+
+```js
+let company = { // the same object, compressed for brevity
+  sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 1600 }],
+  development: {
+    sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
+    internals: [{name: 'Jack', salary: 1300}]
+  }
+};
+
+// The function to do the job
+function sumSalaries(department) {
+  if (Array.isArray(department)) { // case (1)
+    return department.reduce((prev, current) => prev + current.salary, 0); // sum the array
+  } else { // case (2)
+    let sum = 0;
+    for (let subdep of Object.values(department)) {
+      sum += sumSalaries(subdep); // recursively call for subdepartments, sum the results
+    }
+    return sum;
+  }
+}
+
+alert(sumSalaries(company)); // 7700
+```
+
+## Recursive Structures
+The structure of a recursive data structure is a struxture that replicates itself in parts
+
+### Linked List
+Imagine we want to store an ordered list of objects. Naturally, we would do: `let arr = [obj1, obj2, obj3];`
+
+But a problem with arrays is that "delete element" and "insert element" operations are expensive. `arr.unshift(obj)` or `arr.shift()` has to re-number all elements ot make room for a new `obj`. If that array is big, then it will take time.
+
+The only operation that does not require mass-renumbering are those with the end of array: `arr.push/pop`.
+
+Alternatively, if we need fast insertion/deletion, we can choose another data structure called **linked list**
+
+Linked List element is recursively defined as an object with:
+- `value`
+- `next` referring to the next linekd list element or `null` if its the end
+
+For example:
+```js
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
+  }
+};
+```
+
+or an alternative code for creation:
+
+```js
+let list = { value: 1 };
+list.next = { value: 2 };
+list.next.next = { value: 3 };
+list.next.next.next = { value: 4 };
+list.next.next.next.next = null;
+```
+
+We can split the list into multiple parts and join back together later
+
+```js
+let secondList = list.next.next;
+list.next.next = null;
+```
+
+To join:
+```js
+list.next.next = secondList;
+```
+
+We can insert or remove items in any place. For instance, to prepend a new value, we nee dto update the head of the list
+
+```js
+let list = { value: 1 };
+list.next = { value: 2 };
+list.next.next = { value: 3 };
+list.next.next.next = { value: 4 };
+
+// prepend the new value to the list
+list = { value: "new item", next: list };
+```
+
+To remove value from middle, change `next` of previous one:
+
+```js
+list.next = list.next.next;
+```
+
+We made `list.next` jump over `1` to `2`. The value `1` is now excluded from the chain. If its not stored anywhere else, it'll be automatically removed from memory.
+
+Unlike array, theres no mass renumbering, and we can easily rearranage elements.
+
+Though there are pros, there are also cons to using a list. It cannot easily access elements by its number.
+
+In an array, its easy: `arr[n]`, but in the list, we need to starat from the first itme and go to `next` `N` times to get the Nth element.
+
+List can be enhanced:
+- We can add property prev in addition to next to reference the previous element, to move back easily.
+- We can also add a variable named tail referencing the last element of the list (and update it when adding/removing elements from the end).
+- ...The data structure may vary according to our needs.
+
+
+## Summary
+
+- Recursion is a programming term that means a function calling itself. Recursive function can solve problems/tasks in an elegant way
+  - When a function calls itself, that is called a recursion step
+
+- A recursively-defined structure is a data structure that can be defined using itself
+  - For instance, a linked list can be defined as a data structure consisting of an object referencing a list (or null)
+  - `list = { value, next -> list }`
+
+Any recursive function can be rewritten as an iterative one. That's sometimes requried due to cost and optimization, but it's usually fast enough and easier to write and support.
